@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { makeServer } from './server';
 import { LoginContextProvider } from './Context/LoginContext';
 import { UserContextProvider } from './Context/UserContext';
+import { FeedContextProvider } from './Context/FeedContext';
 
 // Call make Server
 makeServer();
@@ -17,7 +18,9 @@ root.render(
     <Router>
       <LoginContextProvider>
         <UserContextProvider>
-          <App />
+          <FeedContextProvider>
+            <App />
+          </FeedContextProvider>
         </UserContextProvider>
       </LoginContextProvider>
     </Router>

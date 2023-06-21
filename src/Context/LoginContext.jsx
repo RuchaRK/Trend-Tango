@@ -7,11 +7,19 @@ export const LoginContext = React.createContext();
 
 export function LoginContextProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = React.useState();
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [followers, setFollowers] = React.useState([]);
+  const [following, setFollowing] = React.useState([]);
+  const [userBookmarks, setUserBookmarks] = React.useState([]);
   const navigate = useNavigate();
 
-  const allowLogin = (token) => {
+  const allowLogin = (data) => {
     setIsLoggedIn(true);
-    setLoginToken(token);
+    setLoginToken(data.encodedToken);
+    setCurrentUser({ _id: data.foundUser._id, username: data.foundUser.username });
+    setFollowers(data.foundUser.followers);
+    setFollowing(data.foundUser.following);
+    setUserBookmarks(data.foundUser.bookmarks);
     navigate(routeName.HOME);
   };
 
@@ -23,7 +31,18 @@ export function LoginContextProvider({ children }) {
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <LoginContext.Provider value={{ isLoggedIn, allowLogin, logout }}>
+    <LoginContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
+      value={{
+        isLoggedIn,
+        allowLogin,
+        logout,
+        currentUser,
+        followers,
+        following,
+        userBookmarks,
+        setUserBookmarks
+      }}>
       {children}
     </LoginContext.Provider>
   );

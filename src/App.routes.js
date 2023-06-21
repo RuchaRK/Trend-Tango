@@ -1,5 +1,7 @@
 export const routeName = {
   HOME: '/',
   LOGIN: '/login',
-  SIGNIN: '/signin'
+  SIGNIN: '/signin',
+  EXPLORE: '/explore',
+  BOOKMARK: '/bookmark'
 };

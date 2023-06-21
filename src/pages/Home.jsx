@@ -1,46 +1,51 @@
 /* eslint-disable no-console */
 import * as React from 'react';
-import { useContext } from 'react';
-import { LoginContext } from '../Context/LoginContext';
-import { Header } from '../Components/Header';
-import {
-  HomeContainer,
-  OptionsContainer,
-  FeedContainer,
-  UserContainer,
-  LoggedUser
-} from './Home.style';
 import { Feed } from './Feed';
-
-// import { UserContext } from '../Context/UserContext';
+import { FeedContext } from '../Context/FeedContext';
+import { LoginContext } from '../Context/LoginContext';
+import { Button } from '../Components/Button';
+import { CreatePostContainer, PostInput } from './Home.style';
 
 export function Home() {
-  const { logout } = useContext(LoginContext);
+  const { postsToShow } = React.useContext(FeedContext);
+  const { currentUser, following } = React.useContext(LoginContext);
+
+  const createANewPost = async () => {
+    try {
+      const response = fetch('/api/user/posts/', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: getLoginToken()
+        }
+      });
+    } catch (error) {}
+  };
+
+  const userRelatedPosts = postsToShow.filter(
+    (data) => data.username === (currentUser.username || following.username)
+  );
 
   return (
     <div style={{ height: '100%' }}>
-      <Header />
-      <HomeContainer>
-        <OptionsContainer>
-          <div>
-            <h3>Home</h3>
-            <h3>Explore</h3>
-            <h3>Bookmark</h3>
-            <h3>Profile</h3>
-            <button onClick={logout}>Logout</button>
-          </div>
-          <LoggedUser>
-            <h1>hi</h1>
-          </LoggedUser>
-        </OptionsContainer>
-        <FeedContainer>
-          <h2>feed</h2>
-          <Feed />
-        </FeedContainer>
-        <UserContainer>
-          <h2>users</h2>
-        </UserContainer>
-      </HomeContainer>
+      <CreatePostContainer>
+        <PostInput>
+          <textarea
+            style={{ padding: '10px 10px' }}
+            placeholder="Start posting the latest trend you have come across..."
+            rows="6"
+            cols="50"
+          />
+        </PostInput>
+        <div>
+          <Button varient="outlined" onClick={() => createANewPost}>
+            {' '}
+            Post{' '}
+          </Button>
+        </div>
+      </CreatePostContainer>
+      <Feed feedToShow={userRelatedPosts} />
     </div>
   );
 }

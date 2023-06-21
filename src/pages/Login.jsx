@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LoginContainer, ImageContainer, LoginDataContainer, LoginData } from './Login.style';
 import { LoginContext } from '../Context/LoginContext';
 import { routeName } from '../App.routes';
@@ -14,12 +14,6 @@ export function Login() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
   const { allowLogin } = React.useContext(LoginContext);
-  const navigate = useNavigate();
-
-  const login = (token) => {
-    allowLogin(token);
-    navigate(routeName.HOME);
-  };
 
   const checkCredentials = async (username, password) => {
     try {
@@ -41,9 +35,11 @@ export function Login() {
         setIsError(true);
       }
 
-      if (data.encodedToken) {
-        login(data.encodedToken);
+      if (data) {
+        allowLogin(data);
       }
+
+      console.log(data);
     } catch (error) {
       console.error(error);
     } finally {
