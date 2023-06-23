@@ -38,8 +38,6 @@ export function Login() {
       if (data) {
         allowLogin(data);
       }
-
-      console.log(data);
     } catch (error) {
       console.error(error);
     } finally {

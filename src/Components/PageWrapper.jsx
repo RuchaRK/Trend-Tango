@@ -39,11 +39,16 @@ export function PageWrapper({ children }) {
             <button onClick={logout}>Logout</button>
           </div>
           <LoggedUser>
-            <p>
-              {userLookUp[currentUser.username] && userLookUp[currentUser.username].firstName}
-              {userLookUp[currentUser.username] && userLookUp[currentUser.username].lastName}
-            </p>
-            <p> @{userLookUp[currentUser.username] && userLookUp[currentUser.username].username}</p>
+            <Link to={`/userProfile/${currentUser._id}`}>
+              <p>
+                {userLookUp[currentUser.username] && userLookUp[currentUser.username].firstName}
+                {userLookUp[currentUser.username] && userLookUp[currentUser.username].lastName}
+              </p>
+              <p>
+                {' '}
+                @{userLookUp[currentUser.username] && userLookUp[currentUser.username].username}
+              </p>
+            </Link>
           </LoggedUser>
         </OptionsContainer>
         <FeedContainer>{children}</FeedContainer>

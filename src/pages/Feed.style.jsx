@@ -8,6 +8,8 @@ export const MainContainer = styled.div`
 export const UserInfoContainer = styled.div`
   display: flex;
   border: 1px solid purple;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const UserData = styled.div`

@@ -28,5 +28,7 @@ export function UserContextProvider({ children }) {
 
   //   allUserData.map((data) => setUserNameData({ ...userNameData, username: data }));
 
-  return <UserContext.Provider value={{ userLookUp, users }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ userLookUp, users, setUsers }}>{children}</UserContext.Provider>
+  );
 }

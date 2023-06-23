@@ -20,7 +20,9 @@ function App() {
           path="/userProfile/:id"
           element={
             <RequiresAuth>
-              <UserProfile />
+              <PageWrapper>
+                <UserProfile />
+              </PageWrapper>
             </RequiresAuth>
           }
         />
