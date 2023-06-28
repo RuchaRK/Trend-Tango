@@ -1,23 +1,16 @@
 import * as React from 'react';
-import { MainContainer, PostMessageContainer } from './Feed.style';
-import { PostsFooter } from './Posts/PostsFooter';
-import { PostsHeader } from './Posts/PostsHeader';
+import { MainContainer } from './Feed.style';
 
-export function Feed({ feedToShow }) {
+import { Posts } from './Posts/Posts';
+
+export function Feed({ feedToShow, title }) {
+  console.log(title);
   return (
     <MainContainer>
+      <h2> {title}</h2>
       {feedToShow &&
         feedToShow.map((post) => {
-          return (
-            <>
-              <PostsHeader post={post} />
-              <PostMessageContainer>
-                <h2>posts to show</h2>
-                <p>{post.content}</p>
-              </PostMessageContainer>
-              <PostsFooter post={post} />
-            </>
-          );
+          return <Posts post={post} />;
         })}
     </MainContainer>
   );

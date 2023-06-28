@@ -59,7 +59,7 @@ export function Home() {
           </Button>
         </div>
       </CreatePostContainer>
-      <Feed feedToShow={userRelatedPosts} />
+      <Feed feedToShow={userRelatedPosts} title="Home" />
     </div>
   );
 }

@@ -9,6 +9,7 @@ import { PageWrapper } from './Components/PageWrapper';
 import { Explore } from './pages/Explore';
 import { Bookmark } from './pages/Bookmark';
 import { UserProfile } from './pages/UserProfile';
+import { SinglePost } from './pages/SinglePost';
 
 function App() {
   return (
@@ -16,6 +17,16 @@ function App() {
       <Routes>
         <Route path={routeName.LOGIN} element={<Login />} />
         <Route path={routeName.SIGNIN} element={<Signin />} />
+        <Route
+          path="/posts/:postId"
+          element={
+            <RequiresAuth>
+              <PageWrapper>
+                <SinglePost />
+              </PageWrapper>
+            </RequiresAuth>
+          }
+        />
         <Route
           path="/userProfile/:id"
           element={
