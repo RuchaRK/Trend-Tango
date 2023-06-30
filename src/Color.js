@@ -1,7 +1,7 @@
 export const ColorPalette = {
   primary: {
     dark: '#98314c',
-    main: '#D23F57',
+    main: '#150AA1;',
     light: '#ea92a7',
     backdrop: '#fae4e9'
   },

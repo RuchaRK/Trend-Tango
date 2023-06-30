@@ -1,22 +1,33 @@
 import styled from '@emotion/styled';
+import { ColorPalette } from '../Color';
 
 export const HomeContainer = styled.div`
   display: flex;
-  padding: 36px 36px;
-  height: calc(100vh -144px);
+  padding: 0px 36px;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
 `;
 
-export const OptionsContainer = styled.div`
+export const Title = styled.h3`
+  margin: 0px 16px;
+  text-align: left;
+  height: 32px;
+  display: flex;
+  align-item: center;
+  color: ${ColorPalette.main};
+`;
+
+export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 15px 15px;
   align-items: flex-end;
   gap: 10px;
   justify-content: space-between;
   flex: 0.2;
-
   cursor: pointer;
-  padding: 20px;
+  padding: 36px;
+  position: sticky;
+  top: 0;
 `;
 export const OptionItems = styled.div`
   display: flex;
@@ -35,28 +46,43 @@ export const Option = styled.div`
   gap: 8px;
 `;
 
-export const FeedContainer = styled.div`
+export const CenterContainer = styled.div`
   display: flex;
   flex: 0.7;
-  border: 1px solid orange;
-  padding: 15px 15px;
-  justify-content: center;
+  padding: 36px 0px;
+  border-left: 1px solid #e4e4e4;
+  border-right: 1px solid #e4e4e4;
   flex-direction: column;
+  height: 100%;
 `;
 
-export const UserContainer = styled.div`
+export const RightContainer = styled.div`
   display: flex;
   flex: 0.2;
-  border: 1px solid indigo;
-  padding: 15px 15px;
+  padding: 36px 0px 36px 36px;
   flex-direction: column;
+  top: 0;
+  position: sticky;
+  align-items: flex-start;
+`;
+
+export const UserListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+  overflow-y: auto;
+  padding-right: 6px;
 `;
 
 export const SingleUserData = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px;
+  border: 1px solid #e4e4e4;
+  padding: 8px;
+  border-radius: 4px;
+  width: 100%;
 `;
 
 export const LoggedUser = styled.div``;
@@ -64,17 +90,41 @@ export const LoggedUser = styled.div``;
 export const CreatePostContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  flex-direction: column;
+  background: #f1f1f1;
+  margin: 24px 16px;
+  padding: 16px;
+  border-radius: 4px;
 `;
 
 export const PostInput = styled.div`
   display: flex;
+  width: 100%;
+  margin-bottom: 16px;
+  border-radius: 4px;
+`;
+
+export const TextArea = styled.textarea`
+  padding: 10px 10px;
+  height: 120px;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #e4e4e4;
+  outline: 1px solid #e4e4e4;
 `;
 
 export const ImageContainer = styled.div`
-  height: 24px;
-  width: 24px;
+  height: 32px;
+  width: 32px;
   border-radius: 50%;
   border: 1px solid black;
   background: grey;
+`;
+
+export const ImageTextContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 `;

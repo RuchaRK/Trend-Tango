@@ -3,17 +3,14 @@ import { Link } from 'react-router-dom';
 import { PostsHeader } from './PostsHeader';
 import { PostsFooter } from './PostsFooter';
 import { PostMessageContainer } from '../Feed.style';
-import { UserContext } from '../../Context/UserContext';
-import { PostCommentsContainer, CommentsHeader, Comment } from './Posts.style';
+import { PostCommentsContainer, CommentsHeader, Comment, PostContainer } from './Posts.style';
 
 export function Posts({ post, showComments }) {
-  const { userLookUp } = React.useContext(UserContext);
   return (
-    <div>
+    <PostContainer>
       <PostsHeader post={post} />
       <Link to={`/posts/${post._id}`}>
         <PostMessageContainer>
-          <h2>posts to show</h2>
           <p>{post.content}</p>
         </PostMessageContainer>
       </Link>
@@ -29,6 +26,6 @@ export function Posts({ post, showComments }) {
           ))}
         </PostCommentsContainer>
       ) : null}
-    </div>
+    </PostContainer>
   );
 }

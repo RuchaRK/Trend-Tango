@@ -1,12 +1,16 @@
 import * as React from 'react';
 import Modal from 'react-modal';
 import ReactDOM from 'react-dom';
+import { BsThreeDots } from 'react-icons/bs';
+import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu';
+import { MdOutlineModeEditOutline, MdOutlineDeleteOutline } from 'react-icons/md';
 import { UserInfoContainer, UserData } from '../Feed.style';
 import { UserContext } from '../../Context/UserContext';
 import { LoginContext } from '../../Context/LoginContext';
 import { Button } from '../../Components/Button';
 import { usePostActions } from '../../Hook/usePostActions';
 import { FeedContext } from '../../Context/FeedContext';
+import { ImageContainer, ImageTextContainer } from '../Home.style';
 
 export function PostsHeader({ post }) {
   const { userLookUp } = React.useContext(UserContext);
@@ -38,27 +42,53 @@ export function PostsHeader({ post }) {
 
   return (
     <UserInfoContainer>
-      <UserData>
-        <div>
+      <ImageTextContainer>
+        <ImageContainer />
+        <UserData>
           <p>
             {userLookUp[post.username] && userLookUp[post.username].firstName}
             {userLookUp[post.username] && userLookUp[post.username].lastName}
           </p>
-        </div>
-        <p>@{post.username}</p>
-      </UserData>
+          <p>@{post.username}</p>
+        </UserData>
+      </ImageTextContainer>
 
-      <div>
+      <Menu
+        menuButton={
+          <MenuButton
+            style={{
+              borderRadius: '50%',
+              height: '20px',
+              width: '20px',
+              background: '#FFF',
+              display: 'flex',
+              alignItems: 'center',
+              border: '1px solid #B0B0B0',
+              justifyContent: 'center'
+            }}>
+            <BsThreeDots />
+          </MenuButton>
+        }>
         {post.username === currentUser.username ? (
           <>
-            {/* editPost(post._id) */}
-            <Button onClick={() => openEditModal(post._id)}>Edit</Button>
-            <Button onClick={() => deletePost(post._id)}>Delete</Button>
+            <MenuItem onClick={() => openEditModal(post._id)}>
+              <ImageTextContainer>
+                <MdOutlineModeEditOutline />
+                Edit
+              </ImageTextContainer>
+            </MenuItem>
+            <MenuItem onClick={() => deletePost(post._id)}>
+              <ImageTextContainer>
+                <MdOutlineDeleteOutline />
+                Delete
+              </ImageTextContainer>
+            </MenuItem>
           </>
         ) : (
-          <Button onClick={() => unFollowAUser(userLookUp[post.username]._id)}>UnFollow</Button>
+          <MenuItem onClick={() => unFollowAUser(userLookUp[post.username]._id)}>UnFollow</MenuItem>
         )}
-      </div>
+      </Menu>
+
       <Modal isOpen={post.isEdit}>
         <div>
           <textarea

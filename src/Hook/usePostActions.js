@@ -99,7 +99,7 @@ export const usePostActions = () => {
       });
 
       const data = await response.json();
-      console.log(data.posts);
+
       if (data.posts) {
         setPostsToShow(data.posts);
       }

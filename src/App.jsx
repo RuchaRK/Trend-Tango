@@ -31,9 +31,7 @@ function App() {
           path="/userProfile/:id"
           element={
             <RequiresAuth>
-              <PageWrapper>
-                <UserProfile />
-              </PageWrapper>
+              <UserProfile />
             </RequiresAuth>
           }
         />
@@ -41,9 +39,7 @@ function App() {
           path={routeName.HOME}
           element={
             <RequiresAuth>
-              <PageWrapper>
-                <Home />
-              </PageWrapper>
+              <Home />
             </RequiresAuth>
           }
         />

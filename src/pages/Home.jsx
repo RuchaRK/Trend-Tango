@@ -4,8 +4,9 @@ import { Feed } from './Feed';
 import { FeedContext } from '../Context/FeedContext';
 import { LoginContext } from '../Context/LoginContext';
 import { Button } from '../Components/Button';
-import { CreatePostContainer, PostInput } from './Home.style';
+import { CreatePostContainer, PostInput, TextArea } from './Home.style';
 import { getLoginToken } from '../LoginLocalStorage';
+import { PageWrapper } from '../Components/PageWrapper';
 
 export function Home() {
   const { postsToShow, setPostsToShow } = React.useContext(FeedContext);
@@ -41,25 +42,21 @@ export function Home() {
   );
 
   return (
-    <div style={{ height: '100%' }}>
-      <CreatePostContainer>
-        <PostInput>
-          <textarea
-            name="content"
-            style={{ padding: '10px 10px' }}
-            placeholder="Start posting the latest trend you have come across..."
-            rows="6"
-            cols="50"
-            onInput={(event) => setPostContent(event.target.value)}
-          />
-        </PostInput>
-        <div>
-          <Button varient="outlined" onClick={() => createANewPost()}>
-            Post
-          </Button>
-        </div>
-      </CreatePostContainer>
-      <Feed feedToShow={userRelatedPosts} title="Home" />
-    </div>
+    <PageWrapper title="Home">
+      <div style={{ height: '100%' }}>
+        <CreatePostContainer>
+          <PostInput>
+            <TextArea
+              name="content"
+              placeholder="Start posting the latest trend you have come across..."
+              onInput={(event) => setPostContent(event.target.value)}
+            />
+          </PostInput>
+
+          <Button onClick={() => createANewPost()}>Post</Button>
+        </CreatePostContainer>
+        <Feed feedToShow={userRelatedPosts} />
+      </div>
+    </PageWrapper>
   );
 }

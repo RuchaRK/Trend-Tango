@@ -10,10 +10,10 @@ import { Header } from './Header';
 import { Button } from './Button';
 import {
   HomeContainer,
-  OptionsContainer,
-  LoggedUser,
-  FeedContainer,
-  UserContainer,
+  LeftContainer,
+  Title,
+  CenterContainer,
+  RightContainer,
   Option,
   OptionItems,
   ImageContainer
@@ -23,7 +23,7 @@ import { routeName } from '../App.routes';
 import { UserContext } from '../Context/UserContext';
 import { UserList } from '../pages/UserList';
 
-export function PageWrapper({ children }) {
+export function PageWrapper({ children, title }) {
   const { logout, currentUser } = useContext(LoginContext);
   const { userLookUp } = React.useContext(UserContext);
 
@@ -31,7 +31,7 @@ export function PageWrapper({ children }) {
     <>
       <Header />
       <HomeContainer>
-        <OptionsContainer>
+        <LeftContainer>
           <OptionItems>
             <Link to={`/userProfile/${currentUser._id}`}>
               <Option>
@@ -69,11 +69,16 @@ export function PageWrapper({ children }) {
               <Button onClick={logout}>Logout</Button>
             </Option>
           </OptionItems>
-        </OptionsContainer>
-        <FeedContainer>{children}</FeedContainer>
-        <UserContainer>
+        </LeftContainer>
+
+        <CenterContainer>
+          <Title>{title}</Title>
+          {children}
+        </CenterContainer>
+
+        <RightContainer>
           <UserList />
-        </UserContainer>
+        </RightContainer>
       </HomeContainer>
     </>
   );
