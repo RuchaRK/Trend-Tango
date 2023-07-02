@@ -8,7 +8,7 @@ import { Button } from '../../Components/Button';
 
 export function Signin() {
   const [userData, setUserData] = React.useState({});
-  const [isError, setIsError] = React.useState(false);
+  const [isError, setIsError] = React.useState();
   const { allowLogin } = React.useContext(LoginContext);
 
   const addNewUser = async () => {
@@ -28,8 +28,11 @@ export function Signin() {
       });
       const data = await response.json();
 
-      if (data.errors || (data.error && data.error.length > 0)) {
-        setIsError(true);
+      if (data.error) {
+        setIsError(data.error);
+      }
+      if (data.errors && data.errors.length > 0) {
+        setIsError(data.error[0]);
       }
 
       if (data.encodedToken) {
@@ -108,6 +111,7 @@ export function Signin() {
           <Button type="button" onClick={() => addNewUser()}>
             Create New Account
           </Button>
+          {isError && <p>{isError}</p>}
           <Link to={routeName.LOGIN}>Already have an account? Login</Link>
         </FormData>
       </SignContainer>

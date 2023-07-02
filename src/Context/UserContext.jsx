@@ -28,7 +28,9 @@ export function UserContextProvider({ children }) {
 
   //   allUserData.map((data) => setUserNameData({ ...userNameData, username: data }));
 
-  return (
-    <UserContext.Provider value={{ userLookUp, users, setUsers }}>{children}</UserContext.Provider>
-  );
+  const value = React.useMemo(() => {
+    return { userLookUp, users, setUsers };
+  }, [userLookUp, users, setUsers]);
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
