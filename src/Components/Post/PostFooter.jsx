@@ -1,21 +1,17 @@
 import * as React from 'react';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { FaRegCommentAlt } from 'react-icons/fa';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { BsBookmark, BsFillBookmarkFill } from 'react-icons/bs';
+import { FaRegCommentAlt } from 'react-icons/fa';
 import { FiShare2 } from 'react-icons/fi';
-import Modal from 'react-modal';
-import ReactDOM from 'react-dom';
-import { v4 as uuid } from 'uuid';
-import { IconButton } from '../IconButton';
-import { IconContainer } from '../Feed/Feed.style';
 import { LoginContext } from '../../Context/LoginContext';
 import { usePostApis } from '../../Hook/usePostApis';
-import { Button } from '../Button';
+import { IconContainer } from '../Feed/Feed.style';
+import { IconButton } from '../IconButton';
 import { CommenstModal } from './CommentsModal';
 
 export function PostFooter({ post }) {
   const { currentUser, userBookmarks } = React.useContext(LoginContext);
-  const { dislikeAPost, likeAPost, removeBookMarkedPost, bookMarkAPost, editPost } = usePostApis();
+  const { dislikeAPost, likeAPost, removeBookMarkedPost, bookMarkAPost } = usePostApis();
   const isPostLikedByUser = post.likes.likedBy.find((item) => item._id === currentUser._id);
   const isPostBookmarked = userBookmarks.find((item) => item._id === post._id);
   const [modalIsOpen, setIsOpen] = React.useState(false);

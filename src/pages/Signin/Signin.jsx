@@ -11,12 +11,6 @@ export function Signin() {
   const [isError, setIsError] = React.useState(false);
   const { allowLogin } = React.useContext(LoginContext);
 
-  //   const login = (token) => {
-  //     console.log('inside login function');
-  //     allowLogin(token);
-  //     navigate(routeName.HOME);
-  //   };
-
   const addNewUser = async () => {
     try {
       const response = await fetch('api/auth/signup', {

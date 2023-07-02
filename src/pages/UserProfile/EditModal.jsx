@@ -1,19 +1,23 @@
 import * as React from 'react';
-import { InputContainer, Input } from '../../Components/Input';
-import { Modal } from '../../Components/Modal';
+import { BiImageAdd } from 'react-icons/bi';
+import { ColorPalette } from '../../Color';
 import { Button } from '../../Components/Button';
+import { Input, InputContainer } from '../../Components/Input';
+import { Modal } from '../../Components/Modal';
+import { ImagePlaceholder } from '../../Components/PageWrapper/PageWrappers.style';
 import { useUserApis } from '../../Hook/useUserApis';
 
 export function EditModal({ isOpen, closeEditModal, initialUserData, setSingleUserData }) {
   const [formData, setFormData] = React.useState(initialUserData);
   const { editUserDetails } = useUserApis();
+  const [uploadedImage, setUploadedImage] = React.useState(null);
 
   const handleOnChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const onSave = async () => {
-    await editUserDetails({ singleUserData: formData, setSingleUserData });
+    await editUserDetails({ singleUserData: formData, setSingleUserData, img: uploadedImage });
     closeEditModal();
   };
 
@@ -32,6 +36,51 @@ export function EditModal({ isOpen, closeEditModal, initialUserData, setSingleUs
           alignItems: 'flex-end',
           padding: '24px 0px'
         }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            position: 'relative'
+          }}>
+          {uploadedImage ? (
+            <img
+              alt="img"
+              src={URL.createObjectURL(uploadedImage)}
+              height="100px"
+              width="100px"
+              style={{ borderRadius: '50%' }}
+            />
+          ) : (
+            <ImagePlaceholder style={{ height: '100px', width: '100px' }} />
+          )}
+
+          <div style={{ position: 'absolute', right: 'calc(50% - 55px)', bottom: '-5px' }}>
+            <label htmlFor="file">
+              <input
+                id="file"
+                type="file"
+                onChange={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  setUploadedImage(e.target.files[0]);
+                }}
+                style={{
+                  display: 'none'
+                }}
+              />
+              <BiImageAdd
+                size={24}
+                style={{
+                  color: ColorPalette.primary.main,
+                  cursor: 'pointer'
+                }}
+              />
+            </label>
+          </div>
+        </div>
+
         <InputContainer>
           First Name
           <Input

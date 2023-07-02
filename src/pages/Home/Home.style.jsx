@@ -16,6 +16,8 @@ export const PostInput = styled.div`
   width: 100%;
   margin-bottom: 16px;
   border-radius: 4px;
+  flex-direction: column;
+  gap: 12px;
 `;
 
 export const TextArea = styled.textarea`
@@ -25,4 +27,21 @@ export const TextArea = styled.textarea`
   border-radius: 4px;
   border: 1px solid #e4e4e4;
   outline: 1px solid #e4e4e4;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 16px;
+  align-items: center;
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  width: fit-content;
+`;
+
+export const CrossIconContainer = styled.div`
+  position: absolute;
+  top: -10px;
+  right: -10px;
 `;

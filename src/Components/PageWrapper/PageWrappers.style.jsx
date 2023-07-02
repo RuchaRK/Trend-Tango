@@ -20,10 +20,10 @@ export const Title = styled.h3`
 export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 10px;
   justify-content: space-between;
-  flex: 0.1;
+  flex: 0.15;
   cursor: pointer;
   padding: 36px;
   position: sticky;
@@ -38,7 +38,6 @@ export const OptionItems = styled.div`
 `;
 export const Option = styled.div`
   display: flex;
-  color: #686868;
   font-size: 16px;
   font-weight: 500;
   justify-content: center;
@@ -48,7 +47,7 @@ export const Option = styled.div`
 
 export const CenterContainer = styled.div`
   display: flex;
-  flex: 0.7;
+  flex: 0.65;
   padding: 36px 0px;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;

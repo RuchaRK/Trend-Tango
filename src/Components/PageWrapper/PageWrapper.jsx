@@ -1,33 +1,29 @@
+import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { AiOutlineHome } from 'react-icons/ai';
-import { MdOutlineExplore } from 'react-icons/md';
-import { BsFillBookmarkFill } from 'react-icons/bs';
 import { BiLogOut } from 'react-icons/bi';
+import { BsFillBookmarkFill } from 'react-icons/bs';
+import { MdOutlineExplore } from 'react-icons/md';
+import { NavLink } from 'react-router-dom';
+import { routeName } from '../../App.routes';
+import { LoginContext } from '../../Context/LoginContext';
 import { Header } from '../Header';
-import { Button } from '../Button';
+import { UserCard } from '../UserCard/UserCard';
 import {
-  HomeContainer,
-  LeftContainer,
-  Title,
   CenterContainer,
-  RightContainer,
+  HomeContainer,
+  IconContainer,
+  LeftContainer,
   Option,
   OptionItems,
-  ImagePlaceholder,
-  IconContainer
+  RightContainer,
+  Title
 } from './PageWrappers.style';
-import { LoginContext } from '../../Context/LoginContext';
-import { routeName } from '../../App.routes';
-import { UserContext } from '../../Context/UserContext';
 import { UserList } from './UserList';
-import { UserCard } from '../UserCard/UserCard';
 
 export function PageWrapper({ children, title }) {
   const { logout, currentUser } = useContext(LoginContext);
-  const { userLookUp } = React.useContext(UserContext);
 
   return (
     <>
@@ -36,47 +32,63 @@ export function PageWrapper({ children, title }) {
         <LeftContainer>
           <OptionItems>
             <UserCard
-              firstName={
-                userLookUp[currentUser.username] ? userLookUp[currentUser.username].firstName : ''
-              }
-              lastName={
-                userLookUp[currentUser.username] ? userLookUp[currentUser.username].lastName : ''
-              }
+              firstName={currentUser.firstName ?? ''}
+              lastName={currentUser.lastName ?? ''}
               userName={currentUser.username}
-              id={userLookUp[currentUser.username]._id}
+              id={currentUser._id}
+              imgUrl={currentUser.imgUrl}
             />
-            <Link to={routeName.HOME}>
+            <NavLink
+              NavLink
+              to={routeName.HOME}
+              style={({ isActive }) => ({
+                color: isActive ? '#150AA1' : '#686868'
+              })}>
               <Option>
                 <IconContainer>
                   <AiOutlineHome size={20} />
                 </IconContainer>
                 Home
               </Option>
-            </Link>
+            </NavLink>
 
-            <Link to={routeName.EXPLORE}>
+            <NavLink
+              to={routeName.EXPLORE}
+              style={({ isActive }) => ({
+                color: isActive ? '#150AA1' : '#686868'
+              })}>
               <Option>
                 <IconContainer>
                   <MdOutlineExplore size={20} />
                 </IconContainer>
                 Explore
               </Option>
-            </Link>
+            </NavLink>
 
-            <Link to={routeName.BOOKMARK}>
+            <NavLink
+              to={routeName.BOOKMARK}
+              style={({ isActive }) => ({
+                color: isActive ? '#150AA1' : '#686868'
+              })}>
               <Option>
                 <IconContainer>
                   <BsFillBookmarkFill size={16} />
                 </IconContainer>
                 BookMark
               </Option>
-            </Link>
-            <Option onClick={logout}>
-              <IconContainer>
-                <BiLogOut size={20} />
-              </IconContainer>
-              Logout
-            </Option>
+            </NavLink>
+            <NavLink
+              to={routeName.LOGIN}
+              style={({ isActive }) => ({
+                color: isActive ? '#150AA1' : '#686868'
+              })}>
+              <Option onClick={logout}>
+                <IconContainer>
+                  <BiLogOut size={20} />
+                </IconContainer>
+                Logout
+              </Option>
+            </NavLink>
           </OptionItems>
         </LeftContainer>
 

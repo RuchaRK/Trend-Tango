@@ -8,17 +8,19 @@ import {
 } from './UserCard.styles';
 import { ImagePlaceholder } from '../PageWrapper/PageWrappers.style';
 
-export function UserCard({ firstName, lastName, userName, id, action }) {
+export function UserCard({ firstName, lastName, userName, id, action, imgUrl }) {
   const navigate = useNavigate();
   return (
     <UserCardContainer>
-      <UserIconAndDetails>
-        <ImagePlaceholder />
+      <UserIconAndDetails onClick={() => navigate(`/userProfile/${id}`)}>
+        {imgUrl ? (
+          <img alt="img" src={imgUrl} height="32px" width="32px" style={{ borderRadius: '50%' }} />
+        ) : (
+          <ImagePlaceholder />
+        )}
+
         <UserDetailsContainer>
-          <NameContainer
-            onClick={() =>
-              navigate(`/userProfile/${id}`)
-            }>{`${firstName} ${lastName}`}</NameContainer>
+          <NameContainer>{`${firstName} ${lastName}`}</NameContainer>
           <UserNameContainer>@{userName}</UserNameContainer>
         </UserDetailsContainer>
       </UserIconAndDetails>

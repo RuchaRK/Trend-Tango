@@ -16,7 +16,7 @@ export function LoginContextProvider({ children }) {
   const allowLogin = (data) => {
     setIsLoggedIn(true);
     setLoginToken(data.encodedToken);
-    setCurrentUser({ _id: data.foundUser._id, username: data.foundUser.username });
+    setCurrentUser(data.foundUser);
     setFollowers(data.foundUser.followers);
     setFollowing(data.foundUser.following);
     setUserBookmarks(data.foundUser.bookmarks);
@@ -42,7 +42,8 @@ export function LoginContextProvider({ children }) {
         following,
         userBookmarks,
         setUserBookmarks,
-        setFollowing
+        setFollowing,
+        setCurrentUser
       }}>
       {children}
     </LoginContext.Provider>

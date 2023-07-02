@@ -27,7 +27,7 @@ export function UserProfile() {
   const { id } = useParams();
   const { followUser, unFollowAUser } = usePostApis();
   const { currentUser, following, followers } = React.useContext(LoginContext);
-  const [selectedUserPosts, setSelecteduserPosts] = React.useState([]);
+  const [selectedUserPosts, setSelectedUserPosts] = React.useState([]);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = React.useState(false);
   const [isFollowersModalOpen, setIsFollowersModalOpen] = React.useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
@@ -66,7 +66,7 @@ export function UserProfile() {
         setSingleUserData(data.user);
         const postResponse = await fetch(`/api/posts/user/${data.user.username}`);
         const postData = await postResponse.json();
-        setSelecteduserPosts(postData.posts);
+        setSelectedUserPosts(postData.posts);
       }
     } catch (error) {
       console.error(error);
@@ -94,7 +94,15 @@ export function UserProfile() {
         <ProfileContainer>
           <ProfileDataContainer>
             <ImageTextContainer style={{ gap: '16px', alignItems: 'flex-start' }}>
-              <ImagePlaceholder style={{ height: '140px', width: '140px' }} />
+              {!singleUserData.imgUrl ? (
+                <ImagePlaceholder style={{ height: '140px', width: '140px' }} />
+              ) : (
+                <img
+                  src={singleUserData.imgUrl}
+                  style={{ height: '140px', width: '140px', borderRadius: '50%' }}
+                  alt="img"
+                />
+              )}
               <UserData>
                 <UserInfoGroup>
                   <h2>{`${singleUserData.firstName} ${singleUserData.lastName}`}</h2>

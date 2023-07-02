@@ -15,6 +15,8 @@ export function PostHeader({ post }) {
   const { currentUser } = React.useContext(LoginContext);
   const { deletePost, unFollowAUser } = usePostApis();
   const [openModal, setOpenModal] = React.useState(false);
+  const userDetails =
+    post.username === currentUser.username ? currentUser : userLookUp[post.username];
 
   const openEditModal = () => {
     setOpenModal(true);
@@ -27,10 +29,11 @@ export function PostHeader({ post }) {
   return (
     <UserInfoContainer>
       <UserCard
-        firstName={userLookUp[post.username] ? userLookUp[post.username].firstName : ''}
-        lastName={userLookUp[post.username] ? userLookUp[post.username].lastName : ''}
+        firstName={userDetails.firstName ?? ''}
+        lastName={userDetails.lastName ?? ''}
         userName={post.username}
-        id={userLookUp[post.username] ? userLookUp[post.username]._id : ''}
+        id={userDetails._id ?? ''}
+        imgUrl={userDetails.imgUrl}
       />
 
       <Menu

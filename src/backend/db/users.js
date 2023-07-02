@@ -5,9 +5,9 @@ import { formatDate } from '../utils/authUtils';
  * You can add default users of your wish with different attributes
  * */
 
-const users = [
+export const users = [
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Adarsh',
     lastName: 'Balika',
     username: 'adarshbalika',
@@ -16,7 +16,7 @@ const users = [
     updatedAt: '2023-06-30T23:59:59.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Rohan',
     lastName: 'Sharma',
     username: 'rohansharma',
@@ -25,7 +25,7 @@ const users = [
     updatedAt: '2023-07-01T00:00:00.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Sakshi',
     lastName: 'Gupta',
     username: 'sakshigupta',
@@ -34,7 +34,7 @@ const users = [
     updatedAt: '2023-07-02T01:01:01.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Priyanka',
     lastName: 'Dwivedi',
     username: 'priyankadwivedi',
@@ -43,7 +43,7 @@ const users = [
     updatedAt: '2023-07-03T02:02:02.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Amit',
     lastName: 'Kumar',
     username: 'amitkumar',
@@ -52,7 +52,7 @@ const users = [
     updatedAt: '2023-07-04T03:03:03.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Reena',
     lastName: 'Sinha',
     username: 'reenasinha',
@@ -61,7 +61,7 @@ const users = [
     updatedAt: '2023-07-05T04:04:04.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Rahul',
     lastName: 'Shukla',
     username: 'rahulshukla',
@@ -70,7 +70,7 @@ const users = [
     updatedAt: '2023-07-06T05:05:05.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Priya',
     lastName: 'Verma',
     username: 'priyaverma',
@@ -79,7 +79,7 @@ const users = [
     updatedAt: '2023-07-07T06:06:06.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Aditya',
     lastName: 'Sharma',
     username: 'adityasharma',
@@ -88,7 +88,7 @@ const users = [
     updatedAt: '2023-07-08T07:07:07.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Shreya',
     lastName: 'Sinha',
     username: 'shreyasinha',
@@ -97,7 +97,7 @@ const users = [
     updatedAt: '2023-07-09T08:08:08.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Dhruv',
     lastName: 'Verma',
     username: 'dhruvverma',
@@ -106,7 +106,7 @@ const users = [
     updatedAt: '2023-07-10T09:09:09.000Z'
   },
   {
-    _id: uuid.v4(),
+    _id: uuid(),
     firstName: 'Tanvi',
     lastName: 'Shukla',
     username: 'tanvishukla',

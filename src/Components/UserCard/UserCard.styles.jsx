@@ -9,6 +9,7 @@ export const UserIconAndDetails = styled.div`
   display: flex;
   gap: 4px;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const UserDetailsContainer = styled.div`
@@ -19,7 +20,6 @@ export const UserDetailsContainer = styled.div`
 
 export const NameContainer = styled.p`
   font-size: 16px;
-  cursor: pointer;
 `;
 
 export const UserNameContainer = styled.p`
