@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 import * as React from 'react';
-import { Feed } from './Feed';
-import { FeedContext } from '../Context/FeedContext';
-import { LoginContext } from '../Context/LoginContext';
-import { Button } from '../Components/Button';
+import { Feed } from '../../Components/Feed/Feed';
+import { FeedContext } from '../../Context/FeedContext';
+import { LoginContext } from '../../Context/LoginContext';
+import { Button } from '../../Components/Button';
 import { CreatePostContainer, PostInput, TextArea } from './Home.style';
-import { getLoginToken } from '../LoginLocalStorage';
-import { PageWrapper } from '../Components/PageWrapper';
+import { getLoginToken } from '../../LoginLocalStorage';
+import { PageWrapper } from '../../Components/PageWrapper/PageWrapper';
 
 export function Home() {
   const { postsToShow, setPostsToShow } = React.useContext(FeedContext);
@@ -49,11 +49,18 @@ export function Home() {
             <TextArea
               name="content"
               placeholder="Start posting the latest trend you have come across..."
+              value={postContent}
               onInput={(event) => setPostContent(event.target.value)}
             />
           </PostInput>
 
-          <Button onClick={() => createANewPost()}>Post</Button>
+          <Button
+            onClick={async () => {
+              await createANewPost();
+              setPostContent('');
+            }}>
+            Post
+          </Button>
         </CreatePostContainer>
         <Feed feedToShow={userRelatedPosts} />
       </div>

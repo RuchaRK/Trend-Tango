@@ -6,8 +6,8 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { MdOutlineExplore } from 'react-icons/md';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { BiLogOut } from 'react-icons/bi';
-import { Header } from './Header';
-import { Button } from './Button';
+import { Header } from '../Header';
+import { Button } from '../Button';
 import {
   HomeContainer,
   LeftContainer,
@@ -16,12 +16,14 @@ import {
   RightContainer,
   Option,
   OptionItems,
-  ImageContainer
-} from '../pages/Home.style';
-import { LoginContext } from '../Context/LoginContext';
-import { routeName } from '../App.routes';
-import { UserContext } from '../Context/UserContext';
-import { UserList } from '../pages/UserList';
+  ImagePlaceholder,
+  IconContainer
+} from './PageWrappers.style';
+import { LoginContext } from '../../Context/LoginContext';
+import { routeName } from '../../App.routes';
+import { UserContext } from '../../Context/UserContext';
+import { UserList } from './UserList';
+import { UserCard } from '../UserCard/UserCard';
 
 export function PageWrapper({ children, title }) {
   const { logout, currentUser } = useContext(LoginContext);
@@ -33,40 +35,47 @@ export function PageWrapper({ children, title }) {
       <HomeContainer>
         <LeftContainer>
           <OptionItems>
-            <Link to={`/userProfile/${currentUser._id}`}>
-              <Option>
-                <ImageContainer />
-                <div>
-                  <p>
-                    {userLookUp[currentUser.username] && userLookUp[currentUser.username].firstName}
-                    {userLookUp[currentUser.username] && userLookUp[currentUser.username].lastName}
-                  </p>
-                </div>
-              </Option>
-            </Link>
+            <UserCard
+              firstName={
+                userLookUp[currentUser.username] ? userLookUp[currentUser.username].firstName : ''
+              }
+              lastName={
+                userLookUp[currentUser.username] ? userLookUp[currentUser.username].lastName : ''
+              }
+              userName={currentUser.username}
+              id={userLookUp[currentUser.username]._id}
+            />
             <Link to={routeName.HOME}>
               <Option>
-                <AiOutlineHome size={20} /> Home
+                <IconContainer>
+                  <AiOutlineHome size={20} />
+                </IconContainer>
+                Home
               </Option>
             </Link>
 
             <Link to={routeName.EXPLORE}>
               <Option>
-                <MdOutlineExplore size={20} />
+                <IconContainer>
+                  <MdOutlineExplore size={20} />
+                </IconContainer>
                 Explore
               </Option>
             </Link>
 
             <Link to={routeName.BOOKMARK}>
               <Option>
-                <BsFillBookmarkFill size={16} />
+                <IconContainer>
+                  <BsFillBookmarkFill size={16} />
+                </IconContainer>
                 BookMark
               </Option>
             </Link>
-            <Option>
-              <BiLogOut size={20} />
-
-              <Button onClick={logout}>Logout</Button>
+            <Option onClick={logout}>
+              <IconContainer>
+                <BiLogOut size={20} />
+              </IconContainer>
+              Logout
             </Option>
           </OptionItems>
         </LeftContainer>

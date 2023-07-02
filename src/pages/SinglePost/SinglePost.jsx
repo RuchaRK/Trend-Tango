@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { Posts } from './Posts/Posts';
+import { Post } from '../../Components/Post/Post';
+import { PageWrapper } from '../../Components/PageWrapper/PageWrapper';
 
 export function SinglePost() {
   const { postId } = useParams();
@@ -28,9 +29,10 @@ export function SinglePost() {
   }
 
   return (
-    <div>
-      <h1>on Single post page</h1>
-      <Posts post={singlePost} showComments />
-    </div>
+    <PageWrapper title="Post">
+      <div style={{ paddingTop: '24px' }}>
+        <Post post={singlePost} showComments />
+      </div>
+    </PageWrapper>
   );
 }

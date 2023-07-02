@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ColorPalette } from '../Color';
+import { ColorPalette } from '../../Color';
 
 export const HomeContainer = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ export const LeftContainer = styled.div`
   align-items: flex-end;
   gap: 10px;
   justify-content: space-between;
-  flex: 0.2;
+  flex: 0.1;
   cursor: pointer;
   padding: 36px;
   position: sticky;
@@ -53,7 +53,7 @@ export const CenterContainer = styled.div`
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
   flex-direction: column;
-  height: 100%;
+  height: max-content;
 `;
 
 export const RightContainer = styled.div`
@@ -71,14 +71,15 @@ export const UserListContainer = styled.div`
   flex-direction: column;
   gap: 12px;
   margin-top: 24px;
-  overflow-y: auto;
+  overflow-y: hidden;
   padding-right: 6px;
+  width: 100%;
+  &:hover {
+    overflow-y: auto;
+  }
 `;
 
 export const SingleUserData = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border: 1px solid #e4e4e4;
   padding: 8px;
   border-radius: 4px;
@@ -87,39 +88,11 @@ export const SingleUserData = styled.div`
 
 export const LoggedUser = styled.div``;
 
-export const CreatePostContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-direction: column;
-  background: #f1f1f1;
-  margin: 24px 16px;
-  padding: 16px;
-  border-radius: 4px;
-`;
-
-export const PostInput = styled.div`
-  display: flex;
-  width: 100%;
-  margin-bottom: 16px;
-  border-radius: 4px;
-`;
-
-export const TextArea = styled.textarea`
-  padding: 10px 10px;
-  height: 120px;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid #e4e4e4;
-  outline: 1px solid #e4e4e4;
-`;
-
-export const ImageContainer = styled.div`
+export const ImagePlaceholder = styled.div`
   height: 32px;
   width: 32px;
   border-radius: 50%;
-  border: 1px solid black;
-  background: grey;
+  background: #e4e4e4;
 `;
 
 export const ImageTextContainer = styled.div`
@@ -127,4 +100,12 @@ export const ImageTextContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
 `;

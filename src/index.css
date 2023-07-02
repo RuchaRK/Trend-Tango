@@ -33,9 +33,11 @@ body,
   overflow: hidden;
 }
 
-Link{
+a{
   text-decoration: none;
 }
+
+
 
 ::-webkit-scrollbar {
   width: 3px;
@@ -47,5 +49,5 @@ Link{
 
 ::-webkit-scrollbar-thumb {
 background-color: #9790f8cc;
-outline: 1px solid slategrey;
+outline: none;
 }

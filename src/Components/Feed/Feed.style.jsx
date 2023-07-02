@@ -20,6 +20,7 @@ export const UserData = styled.div`
 
 export const PostMessageContainer = styled.div`
   margin-top: 16px;
+  cursor: pointer;
 `;
 
 export const IconContainer = styled.div`

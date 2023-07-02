@@ -3,7 +3,7 @@ import { getLoginToken } from '../LoginLocalStorage';
 import { FeedContext } from '../Context/FeedContext';
 import { LoginContext } from '../Context/LoginContext';
 
-export const usePostActions = () => {
+export const usePostApis = () => {
   const { setPostsToShow } = React.useContext(FeedContext);
   const { setUserBookmarks, setFollowing } = React.useContext(LoginContext);
 
@@ -99,6 +99,7 @@ export const usePostActions = () => {
       });
 
       const data = await response.json();
+      console.log(data.posts);
 
       if (data.posts) {
         setPostsToShow(data.posts);
@@ -127,53 +128,12 @@ export const usePostActions = () => {
     }
   };
 
-  const followUser = async (idValue) => {
-    try {
-      const response = await fetch(`/api/users/follow/${idValue}`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          authorization: getLoginToken()
-        }
-      });
-      const data = await response.json();
-
-      if (data.user) {
-        setFollowing(data.user.following);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const unFollowAUser = async (idValue) => {
-    try {
-      const response = await fetch(`/api/users/unfollow/${idValue}`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          authorization: getLoginToken()
-        }
-      });
-      const data = await response.json();
-
-      if (data) {
-        setFollowing(data.user.following);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return {
     likeAPost,
     dislikeAPost,
     deletePost,
     editPost,
     bookMarkAPost,
-    removeBookMarkedPost,
-    followUser,
-    unFollowAUser
+    removeBookMarkedPost
   };
 };

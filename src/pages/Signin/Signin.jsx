@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { routeName } from '../App.routes';
-import { LoginContext } from '../Context/LoginContext';
-import { Input, InputContainer, Title } from '../Components/Input';
+import { routeName } from '../../App.routes';
+import { LoginContext } from '../../Context/LoginContext';
+import { Input, InputContainer, Title } from '../../Components/Input';
 import { SignContainer, FormData } from './Signin.style';
-import { Button } from '../Components/Button';
+import { Button } from '../../Components/Button';
 
 export function Signin() {
   const [userData, setUserData] = React.useState({});

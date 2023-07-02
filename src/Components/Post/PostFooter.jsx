@@ -6,20 +6,19 @@ import { FiShare2 } from 'react-icons/fi';
 import Modal from 'react-modal';
 import ReactDOM from 'react-dom';
 import { v4 as uuid } from 'uuid';
-import { IconButton } from '../../Components/IconButton';
-import { IconContainer } from '../Feed.style';
+import { IconButton } from '../IconButton';
+import { IconContainer } from '../Feed/Feed.style';
 import { LoginContext } from '../../Context/LoginContext';
-import { usePostActions } from '../../Hook/usePostActions';
-import { Button } from '../../Components/Button';
+import { usePostApis } from '../../Hook/usePostApis';
+import { Button } from '../Button';
+import { CommenstModal } from './CommentsModal';
 
-export function PostsFooter({ post }) {
+export function PostFooter({ post }) {
   const { currentUser, userBookmarks } = React.useContext(LoginContext);
-  const { dislikeAPost, likeAPost, removeBookMarkedPost, bookMarkAPost, editPost } =
-    usePostActions();
+  const { dislikeAPost, likeAPost, removeBookMarkedPost, bookMarkAPost, editPost } = usePostApis();
   const isPostLikedByUser = post.likes.likedBy.find((item) => item._id === currentUser._id);
   const isPostBookmarked = userBookmarks.find((item) => item._id === post._id);
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [comment, setComment] = React.useState('');
 
   function openModal() {
     setIsOpen(true);
@@ -28,11 +27,6 @@ export function PostsFooter({ post }) {
   function closeModal() {
     setIsOpen(false);
   }
-
-  const addComments = (postIdValue, postData) => {
-    editPost(postIdValue, postData);
-    closeModal();
-  };
 
   return (
     <IconContainer>
@@ -64,7 +58,7 @@ export function PostsFooter({ post }) {
           </IconButton>
         </>
       )}
-      <Modal isOpen={modalIsOpen}>
+      {/* <Modal isOpen={modalIsOpen}>
         <h4>Post Replay</h4>
         <input
           style={{ padding: '15px 15px' }}
@@ -82,7 +76,8 @@ export function PostsFooter({ post }) {
           Comment
         </Button>
         <Button onClick={() => closeModal()}>Cancel</Button>
-      </Modal>
+      </Modal> */}
+      <CommenstModal isOpen={modalIsOpen} closeModal={() => closeModal()} post={post} />
     </IconContainer>
   );
 }

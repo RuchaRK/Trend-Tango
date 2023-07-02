@@ -1,9 +1,9 @@
 export const ColorPalette = {
   primary: {
-    dark: '#98314c',
+    dark: '#4620b4',
     main: '#150AA1;',
-    light: '#ea92a7',
-    backdrop: '#fae4e9'
+    light: '#b198e0',
+    backdrop: '#ede6f7'
   },
   secondary: {
     main: '#00997a'

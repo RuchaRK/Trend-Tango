@@ -3,10 +3,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { LoginContainer, ImageContainer, LoginDataContainer, LoginData } from './Login.style';
-import { LoginContext } from '../Context/LoginContext';
-import { routeName } from '../App.routes';
-import { Input, Title } from '../Components/Input';
-import { Button } from '../Components/Button';
+import { LoginContext } from '../../Context/LoginContext';
+import { routeName } from '../../App.routes';
+import { Input, Title } from '../../Components/Input';
+import { Button } from '../../Components/Button';
 
 export function Login() {
   const guestLoginValues = { username: 'adarshbalika', password: 'adarshBalika123' };
@@ -49,12 +49,7 @@ export function Login() {
     <div>
       <LoginContainer>
         <ImageContainer>
-          <img
-            src="https://img.freepik.com/free-vector/hand-drawn-flat-design-connecting-people-infographic_52683-76904.jpg"
-            alt="login"
-            height="400px"
-            width="300px"
-          />
+          <img src="/images/Login.svg" alt="login" height="400px" width="300px" />
         </ImageContainer>
         <LoginDataContainer>
           <Title>TREND-TANGO</Title>
