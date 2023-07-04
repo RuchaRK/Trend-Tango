@@ -45,3 +45,10 @@ export const CrossIconContainer = styled.div`
   top: -10px;
   right: -10px;
 `;
+
+export const FilterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 16px;
+  border-top: 1px solid #e4e4e;
+`;

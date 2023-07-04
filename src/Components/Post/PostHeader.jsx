@@ -5,10 +5,12 @@ import { MdOutlineDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md
 import { LoginContext } from '../../Context/LoginContext';
 import { UserContext } from '../../Context/UserContext';
 import { usePostApis } from '../../Hook/usePostApis';
+import { getRelativeFormattedDate } from '../../dateUtils';
 import { UserInfoContainer } from '../Feed/Feed.style';
 import { ImageTextContainer } from '../PageWrapper/PageWrappers.style';
 import { UserCard } from '../UserCard/UserCard';
 import { EditPostModal } from './EditPostModal';
+import { DateContainer, PostDateContainer } from './Post.style';
 
 export function PostHeader({ post }) {
   const { userLookUp } = React.useContext(UserContext);
@@ -28,13 +30,17 @@ export function PostHeader({ post }) {
 
   return (
     <UserInfoContainer>
-      <UserCard
-        firstName={userDetails.firstName ?? ''}
-        lastName={userDetails.lastName ?? ''}
-        userName={post.username}
-        id={userDetails._id ?? ''}
-        imgUrl={userDetails.imgUrl}
-      />
+      <PostDateContainer>
+        <UserCard
+          firstName={userDetails?.firstName ?? ''}
+          lastName={userDetails?.lastName ?? ''}
+          userName={post.username}
+          id={userDetails?._id ?? ''}
+          imgUrl={userDetails?.imgUrl}
+        />
+        <span style={{ color: 'grey' }}>.</span>
+        <DateContainer> {getRelativeFormattedDate(post.createdAt)}</DateContainer>
+      </PostDateContainer>
 
       <Menu
         menuButton={

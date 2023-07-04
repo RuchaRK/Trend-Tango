@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { ToastContainer } from 'react-toastify';
 import { routeName } from './App.routes';
 import { RequiresAuth } from './Components/RequiresAuth';
 import { Bookmark } from './pages/Bookmark/Bookmark';
@@ -57,6 +58,18 @@ function App() {
           }
         />
       </Routes>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

@@ -23,3 +23,14 @@ export const CommentsHeader = styled.div``;
 export const Comment = styled.div`
   padding: 4px 36px;
 `;
+
+export const PostDateContainer = styled.div`
+  display: flex;
+  gap: 4px;
+  align-items: center;
+`;
+
+export const DateContainer = styled.div`
+  font-size: 12px;
+  color: grey;
+`;

@@ -1,18 +1,22 @@
 /* eslint-disable no-console */
 import * as React from 'react';
+import { Menu, MenuButton, MenuItem } from '@szhsin/react-menu';
 import { BiImageAdd } from 'react-icons/bi';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { MdSort } from 'react-icons/md';
 import { Feed } from '../../Components/Feed/Feed';
 import { FeedContext } from '../../Context/FeedContext';
 import { LoginContext } from '../../Context/LoginContext';
 import { Button } from '../../Components/Button';
+
 import {
   CreatePostContainer,
   PostInput,
   TextArea,
   ButtonContainer,
   ImageContainer,
-  CrossIconContainer
+  CrossIconContainer,
+  FilterContainer
 } from './Home.style';
 import { PageWrapper } from '../../Components/PageWrapper/PageWrapper';
 import { usePostApis } from '../../Hook/usePostApis';
@@ -24,12 +28,25 @@ export function Home() {
   const [postContent, setPostContent] = React.useState('');
   const { createANewPost } = usePostApis();
   const [uploadedImage, setUploadedImage] = React.useState(null);
+  const [filterType, setFilterType] = React.useState('');
 
   const userRelatedPosts = postsToShow.filter(
     (data) =>
       data.username === currentUser.username ||
       following.find((node) => node.username === data.username)
   );
+
+  const filteredData = userRelatedPosts.sort((a, b) => {
+    if (filterType === 'likes') {
+      return a.likes.likeCount - b.likes.likeCount;
+    }
+    if (filterType === 'date') {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    }
+    return 0;
+  });
+
+  console.log(filteredData);
 
   return (
     <PageWrapper title="Home">
@@ -93,6 +110,25 @@ export function Home() {
             </Button>
           </ButtonContainer>
         </CreatePostContainer>
+        <FilterContainer>
+          <p>Latest Posts</p>
+          <Menu
+            menuButton={
+              <MenuButton
+                style={{
+                  background: '#FFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  border: 'none',
+                  justifyContent: 'center'
+                }}>
+                <MdSort size={20} />
+              </MenuButton>
+            }>
+            <MenuItem onClick={() => setFilterType('date')}>Latest</MenuItem>
+            <MenuItem onClick={() => setFilterType('likes')}>Trending</MenuItem>
+          </Menu>
+        </FilterContainer>
         <Feed feedToShow={userRelatedPosts} />
       </div>
     </PageWrapper>

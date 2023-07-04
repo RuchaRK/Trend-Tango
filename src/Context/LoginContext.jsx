@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { setLoginToken, clearLoginToken } from '../LoginLocalStorage';
 import { routeName } from '../App.routes';
 
@@ -11,6 +12,7 @@ export function LoginContextProvider({ children }) {
   const [followers, setFollowers] = React.useState([]);
   const [following, setFollowing] = React.useState([]);
   const [userBookmarks, setUserBookmarks] = React.useState([]);
+
   const navigate = useNavigate();
 
   const allowLogin = (data) => {
@@ -21,12 +23,14 @@ export function LoginContextProvider({ children }) {
     setFollowing(data.foundUser.following);
     setUserBookmarks(data.foundUser.bookmarks);
     navigate(routeName.HOME);
+    toast.success('Welcome back! We missed you.');
   };
 
   const logout = () => {
     setIsLoggedIn(false);
     clearLoginToken();
     navigate(routeName.LOGIN);
+    toast.success('Logged-Out Successfully');
   };
 
   return (

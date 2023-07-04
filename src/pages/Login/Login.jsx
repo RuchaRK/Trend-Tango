@@ -8,9 +8,9 @@ import { routeName } from '../../App.routes';
 import { Input, Title } from '../../Components/Input';
 import { Button } from '../../Components/Button';
 
+const guestLoginValues = { username: 'adarshbalika', password: 'adarshBalika123' };
 export function Login() {
-  const guestLoginValues = { username: 'adarshbalika', password: 'adarshBalika123' };
-  const [loginData, setLoginData] = React.useState();
+  const [loginData, setLoginData] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
   const { allowLogin } = React.useContext(LoginContext);
@@ -60,6 +60,7 @@ export function Login() {
               type="text"
               name="username"
               placeholder="Username"
+              value={loginData.username}
               onChange={(event) =>
                 setLoginData({ ...loginData, [event.target.name]: event.target.value })
               }
@@ -68,6 +69,7 @@ export function Login() {
             <Input
               type="password"
               name="password"
+              value={loginData.password}
               placeholder=" Password"
               onChange={(event) =>
                 setLoginData({ ...loginData, [event.target.name]: event.target.value })
@@ -84,9 +86,13 @@ export function Login() {
               fullWidth
               type="button"
               disabled={isLoading}
-              onClick={() =>
-                checkCredentials(guestLoginValues.username, guestLoginValues.password)
-              }>
+              onClick={() => {
+                setLoginData({
+                  username: guestLoginValues.username,
+                  password: guestLoginValues.password
+                });
+                checkCredentials(guestLoginValues.username, guestLoginValues.password);
+              }}>
               Guest Login
             </Button>
             <Link style={{ textDecoration: 'none' }} to={routeName.SIGNIN}>

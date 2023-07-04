@@ -2,6 +2,7 @@ import * as React from 'react';
 import { getLoginToken } from '../LoginLocalStorage';
 import { LoginContext } from '../Context/LoginContext';
 import { uploadImage } from './uploadImageApi';
+import { toast } from 'react-toastify';
 
 export const useUserApis = () => {
   const { setFollowing, setCurrentUser } = React.useContext(LoginContext);
@@ -19,6 +20,7 @@ export const useUserApis = () => {
       const data = await response.json();
 
       if (data.user) {
+        toast('Followed');
         setFollowing(data.user.following);
       }
     } catch (error) {
