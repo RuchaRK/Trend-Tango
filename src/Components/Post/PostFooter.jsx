@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart, AiOutlineComment } from 'react-icons/ai';
 import { BsBookmark, BsFillBookmarkFill } from 'react-icons/bs';
-import { FaRegCommentAlt } from 'react-icons/fa';
-import { FiShare2 } from 'react-icons/fi';
 import { LoginContext } from '../../Context/LoginContext';
 import { usePostApis } from '../../Hook/usePostApis';
 import { IconContainer } from '../Feed/Feed.style';
 import { IconButton } from '../IconButton';
-import { CommenstModal } from './CommentsModal';
+import { CommentsModal } from './CommentsModal';
+import { ImageTextContainer } from '../PageWrapper/PageWrappers.style';
 
 export function PostFooter({ post }) {
   const { currentUser, userBookmarks } = React.useContext(LoginContext);
@@ -28,52 +27,30 @@ export function PostFooter({ post }) {
     <IconContainer>
       {post && (
         <>
-          <IconButton
-            onClick={() => (isPostLikedByUser ? dislikeAPost(post._id) : likeAPost(post._id))}>
-            {isPostLikedByUser ? (
-              <>
-                <AiFillHeart size={25} />
-                {post.likes.likeCount > 0 && post.likes.likeCount}
-              </>
-            ) : (
-              <AiOutlineHeart size={25} />
-            )}
-          </IconButton>
-          <IconButton onClick={() => openModal()}>
-            <FaRegCommentAlt size={20} />
-          </IconButton>
+          <ImageTextContainer style={{ gap: '0', alignItems: 'center' }}>
+            <IconButton
+              onClick={() => (isPostLikedByUser ? dislikeAPost(post._id) : likeAPost(post._id))}>
+              {isPostLikedByUser ? <AiFillHeart size={20} /> : <AiOutlineHeart size={20} />}
+            </IconButton>
+            <span>{post.likes.likeCount > 0 && post.likes.likeCount}</span>
+          </ImageTextContainer>
+          <ImageTextContainer style={{ gap: '0', alignItems: 'center' }}>
+            <IconButton onClick={() => openModal()}>
+              <AiOutlineComment size={20} />
+            </IconButton>
+            <span>{post.comments.length > 0 && post.comments.length}</span>
+          </ImageTextContainer>
 
           <IconButton
             onClick={() =>
               isPostBookmarked ? removeBookMarkedPost(post._id) : bookMarkAPost(post._id)
             }>
-            {isPostBookmarked ? <BsFillBookmarkFill size={20} /> : <BsBookmark size={20} />}
-          </IconButton>
-          <IconButton>
-            <FiShare2 size={20} />
+            {isPostBookmarked ? <BsFillBookmarkFill size={16} /> : <BsBookmark size={16} />}
           </IconButton>
         </>
       )}
-      {/* <Modal isOpen={modalIsOpen}>
-        <h4>Post Replay</h4>
-        <input
-          style={{ padding: '15px 15px' }}
-          type="text"
-          placeholder="Add your comments ...."
-          value={comment}
-          onChange={(event) => setComment(event.target.value)}
-        />
-        <Button
-          onClick={() =>
-            addComments(post._id, {
-              comments: [{ _id: uuid(), content: comment, username: post.username }]
-            })
-          }>
-          Comment
-        </Button>
-        <Button onClick={() => closeModal()}>Cancel</Button>
-      </Modal> */}
-      <CommenstModal isOpen={modalIsOpen} closeModal={() => closeModal()} post={post} />
+
+      <CommentsModal isOpen={modalIsOpen} closeModal={() => closeModal()} post={post} />
     </IconContainer>
   );
 }

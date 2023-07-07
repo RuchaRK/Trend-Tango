@@ -151,6 +151,7 @@ export function UserProfile() {
         isOpen={isFollowingModalOpen}
         closeModal={() => closeFollowingModal()}
         followingUsers={followingUsers}
+        showAction={singleUserData._id === currentUser._id}
       />
 
       <FollowersModal

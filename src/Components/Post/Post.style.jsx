@@ -27,10 +27,25 @@ export const Comment = styled.div`
 export const PostDateContainer = styled.div`
   display: flex;
   gap: 4px;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const DateContainer = styled.div`
   font-size: 12px;
   color: grey;
+  padding-top: 5px;
+`;
+
+export const PostMessageContainer = styled.div`
+  margin-top: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+export const Img = styled.img`
+  border-radius: 4px;
+  width: 400px;
+  align-self: center;
 `;

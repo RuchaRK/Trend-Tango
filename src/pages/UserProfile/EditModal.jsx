@@ -44,10 +44,10 @@ export function EditModal({ isOpen, closeEditModal, initialUserData, setSingleUs
             width: '100%',
             position: 'relative'
           }}>
-          {uploadedImage ? (
+          {uploadedImage || initialUserData.imgUrl ? (
             <img
               alt="img"
-              src={URL.createObjectURL(uploadedImage)}
+              src={uploadedImage ? URL.createObjectURL(uploadedImage) : initialUserData.imgUrl}
               height="100px"
               width="100px"
               style={{ borderRadius: '50%' }}

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { toast } from 'react-toastify';
 import { getLoginToken } from '../LoginLocalStorage';
 import { FeedContext } from '../Context/FeedContext';
 import { LoginContext } from '../Context/LoginContext';
@@ -10,7 +11,7 @@ export const usePostApis = () => {
 
   const likeAPost = async (idValue) => {
     try {
-      const response = await fetch(`api/posts/like/${idValue}`, {
+      const response = await fetch(`/api/posts/like/${idValue}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -29,7 +30,7 @@ export const usePostApis = () => {
 
   const dislikeAPost = async (idValue) => {
     try {
-      const response = await fetch(`api/posts/dislike/${idValue}`, {
+      const response = await fetch(`/api/posts/dislike/${idValue}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -49,7 +50,7 @@ export const usePostApis = () => {
 
   const bookMarkAPost = async (idValue) => {
     try {
-      const response = await fetch(`api/users/bookmark/${idValue}/`, {
+      const response = await fetch(`/api/users/bookmark/${idValue}/`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -60,6 +61,7 @@ export const usePostApis = () => {
       const data = await response.json();
       if (data.bookmarks) {
         setUserBookmarks(data.bookmarks);
+        toast.success('Post Bookmarked!!');
       }
     } catch (error) {
       console.error(error);
@@ -68,7 +70,7 @@ export const usePostApis = () => {
 
   const removeBookMarkedPost = async (idValue) => {
     try {
-      const response = await fetch(`api/users/remove-bookmark/${idValue}/`, {
+      const response = await fetch(`/api/users/remove-bookmark/${idValue}/`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -79,6 +81,7 @@ export const usePostApis = () => {
       const data = await response.json();
       if (data.bookmarks) {
         setUserBookmarks(data.bookmarks);
+        toast.success('Post removed from Bookmarks.');
       }
     } catch (error) {
       console.error(error);
@@ -86,6 +89,7 @@ export const usePostApis = () => {
   };
 
   const editPost = async (idValue, postData) => {
+    console.log('inside edit post');
     try {
       const response = await fetch(`/api/posts/edit/${idValue}`, {
         method: 'POST',
@@ -100,9 +104,11 @@ export const usePostApis = () => {
       });
 
       const data = await response.json();
+      console.log('edit post', { data });
 
       if (data.posts) {
         setPostsToShow(data.posts);
+        toast.success('Comment added');
       }
     } catch (error) {
       console.error(error);
@@ -122,6 +128,7 @@ export const usePostApis = () => {
       const data = await response.json();
       if (data.posts) {
         setPostsToShow(data.posts);
+        toast.error('Post Deleted');
       }
     } catch (error) {
       console.error(error);
@@ -149,6 +156,7 @@ export const usePostApis = () => {
       const data = await response.json();
       if (data.posts) {
         setPostsToShow(data.posts);
+        toast.success('Post Created!!');
       }
     } catch (error) {
       console.error(error);

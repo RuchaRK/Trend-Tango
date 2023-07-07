@@ -3,10 +3,12 @@ import { v4 as uuid } from 'uuid';
 import { Modal } from '../Modal';
 import { usePostApis } from '../../Hook/usePostApis';
 import { Button } from '../Button';
+import { LoginContext } from '../../Context/LoginContext';
 
-export function CommenstModal({ isOpen, closeModal, post }) {
+export function CommentsModal({ isOpen, closeModal, post }) {
   const { editPost } = usePostApis();
   const [comment, setComment] = React.useState('');
+  const { currentUser } = React.useContext(LoginContext);
 
   const addComments = async (postIdValue, postData) => {
     await editPost(postIdValue, postData);
@@ -34,8 +36,12 @@ export function CommenstModal({ isOpen, closeModal, post }) {
             onClick={() =>
               addComments(post._id, {
                 comments: post.comments
-                  ? post.comments.concat({ _id: uuid(), content: comment, username: post.username })
-                  : [{ _id: uuid(), content: comment, username: post.username }]
+                  ? post.comments.concat({
+                      _id: uuid(),
+                      content: comment,
+                      username: currentUser.username
+                    })
+                  : [{ _id: uuid(), content: comment, username: currentUser.username }]
               })
             }>
             Comment

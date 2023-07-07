@@ -23,7 +23,7 @@ export function LoginContextProvider({ children }) {
     setFollowing(data.foundUser.following);
     setUserBookmarks(data.foundUser.bookmarks);
     navigate(routeName.HOME);
-    toast.success('Welcome back! We missed you.');
+    toast.success('👋 It’s so good to have you back!!');
   };
 
   const logout = () => {

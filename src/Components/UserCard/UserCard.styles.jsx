@@ -20,8 +20,10 @@ export const UserDetailsContainer = styled.div`
 
 export const NameContainer = styled.p`
   font-size: 16px;
+  font-weight: 500;
 `;
 
 export const UserNameContainer = styled.p`
   font-size: 12px;
+  color: '#e4e4e4';
 `;

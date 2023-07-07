@@ -6,7 +6,7 @@ import { SingleUserData, UserListContainer } from '../../Components/PageWrapper/
 import { UserCard } from '../../Components/UserCard/UserCard';
 import { useUserApis } from '../../Hook/useUserApis';
 
-export function FollowingModal({ followingUsers, isOpen, closeModal }) {
+export function FollowingModal({ followingUsers, isOpen, closeModal, showAction }) {
   const { unFollowAUser } = useUserApis();
   return (
     <Modal
@@ -22,10 +22,13 @@ export function FollowingModal({ followingUsers, isOpen, closeModal }) {
               firstName={info.firstName}
               lastName={info.lastName}
               userName={info.username}
+              imgUrl={info.imgUrl}
               action={
-                <IconButton onClick={() => unFollowAUser(info._id)}>
-                  <SlUserUnfollow size={20} />
-                </IconButton>
+                showAction ? (
+                  <IconButton onClick={() => unFollowAUser(info._id)}>
+                    <SlUserUnfollow size={20} />
+                  </IconButton>
+                ) : null
               }
             />
           </SingleUserData>

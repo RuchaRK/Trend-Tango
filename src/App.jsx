@@ -59,11 +59,11 @@ function App() {
         />
       </Routes>
       <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
+        position="bottom-left"
+        autoClose={1000}
         hideProgressBar
         newestOnTop={false}
-        closeOnClick
+        closeOnClick={false}
         rtl={false}
         pauseOnFocusLoss
         draggable

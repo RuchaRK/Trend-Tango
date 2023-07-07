@@ -18,11 +18,6 @@ export const UserData = styled.div`
   align-items: flex-start;
 `;
 
-export const PostMessageContainer = styled.div`
-  margin-top: 16px;
-  cursor: pointer;
-`;
-
 export const IconContainer = styled.div`
   display: flex;
   gap: 10px;

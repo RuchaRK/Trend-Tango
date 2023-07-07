@@ -11,11 +11,13 @@ import { ImageTextContainer } from '../PageWrapper/PageWrappers.style';
 import { UserCard } from '../UserCard/UserCard';
 import { EditPostModal } from './EditPostModal';
 import { DateContainer, PostDateContainer } from './Post.style';
+import { useUserApis } from '../../Hook/useUserApis';
 
 export function PostHeader({ post }) {
   const { userLookUp } = React.useContext(UserContext);
   const { currentUser } = React.useContext(LoginContext);
-  const { deletePost, unFollowAUser } = usePostApis();
+  const { unFollowAUser } = useUserApis();
+  const { deletePost } = usePostApis();
   const [openModal, setOpenModal] = React.useState(false);
   const userDetails =
     post.username === currentUser.username ? currentUser : userLookUp[post.username];

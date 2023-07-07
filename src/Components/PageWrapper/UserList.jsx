@@ -24,6 +24,8 @@ export function UserList() {
                 firstName={user.firstName}
                 lastName={user.lastName}
                 userName={user.username}
+                imgUrl={user.imgUrl}
+                id={user._id}
                 action={
                   <IconButton onClick={() => followUser(user._id)}>
                     <SlUserFollow size={20} />

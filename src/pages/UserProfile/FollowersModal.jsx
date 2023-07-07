@@ -18,6 +18,7 @@ export function FollowersModal({ isOpen, closeModal, followerUsers }) {
               firstName={info.firstName}
               lastName={info.lastName}
               userName={info.username}
+              imgUrl={info.imgUrl}
             />
           </SingleUserData>
         ))}

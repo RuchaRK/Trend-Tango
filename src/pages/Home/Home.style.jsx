@@ -49,6 +49,6 @@ export const CrossIconContainer = styled.div`
 export const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 24px 16px;
+  padding: 0px 16px 24px;
   border-top: 1px solid #e4e4e;
 `;

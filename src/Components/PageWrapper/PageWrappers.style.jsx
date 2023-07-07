@@ -52,6 +52,7 @@ export const CenterContainer = styled.div`
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
   flex-direction: column;
+  min-height: 100%;
   height: max-content;
 `;
 

@@ -36,17 +36,15 @@ export function Home() {
       following.find((node) => node.username === data.username)
   );
 
-  const filteredData = userRelatedPosts.sort((a, b) => {
+  userRelatedPosts.sort((a, b) => {
     if (filterType === 'likes') {
-      return a.likes.likeCount - b.likes.likeCount;
+      return b.likes.likeCount - a.likes.likeCount;
     }
     if (filterType === 'date') {
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     }
     return 0;
   });
-
-  console.log(filteredData);
 
   return (
     <PageWrapper title="Home">
@@ -111,7 +109,7 @@ export function Home() {
           </ButtonContainer>
         </CreatePostContainer>
         <FilterContainer>
-          <p>Latest Posts</p>
+          <p>{filterType === 'date' ? 'Latest Posts' : 'Trending'}</p>
           <Menu
             menuButton={
               <MenuButton

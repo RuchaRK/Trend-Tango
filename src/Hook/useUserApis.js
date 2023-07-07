@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { toast } from 'react-toastify';
 import { getLoginToken } from '../LoginLocalStorage';
 import { LoginContext } from '../Context/LoginContext';
 import { uploadImage } from './uploadImageApi';
-import { toast } from 'react-toastify';
 
 export const useUserApis = () => {
   const { setFollowing, setCurrentUser } = React.useContext(LoginContext);
@@ -20,8 +20,8 @@ export const useUserApis = () => {
       const data = await response.json();
 
       if (data.user) {
-        toast('Followed');
         setFollowing(data.user.following);
+        toast.success(`Started following ${data.followUser.firstName} ${data.followUser.lastName}`);
       }
     } catch (error) {
       console.error(error);
@@ -42,6 +42,7 @@ export const useUserApis = () => {
 
       if (data) {
         setFollowing(data.user.following);
+        toast.error(`You unfollowed ${data.followUser.firstName} ${data.followUser.lastName}`);
       }
     } catch (error) {
       console.error(error);
@@ -73,6 +74,7 @@ export const useUserApis = () => {
       if (editedData.user) {
         setSingleUserData({ ...editedData.user });
         setCurrentUser(editedData.user);
+        toast.success('Profile Updated successfully.');
       }
     } catch (error) {
       console.error(error);
