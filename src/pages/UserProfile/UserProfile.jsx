@@ -100,21 +100,23 @@ export function UserProfile() {
                   <p>@{singleUserData.username}</p>
                 </UserInfoGroup>
                 <UserInfoGroup>
-                  <p>{singleUserData.bio}</p>
-                  <p>{singleUserData.website}</p>
+                  {singleUserData.bio && <p>{singleUserData.bio}</p>}
+                  {singleUserData.website && (
+                    <a href={singleUserData.website} target="_blank" rel="noreferrer">
+                      {singleUserData.website}
+                    </a>
+                  )}
                 </UserInfoGroup>
 
                 <MetadataContainer>
                   <p
                     onClick={followingUsers.length > 0 ? openFollowingModal : undefined}
-                    style={{ cursor: 'pointer' }}
-                  >
+                    style={{ cursor: 'pointer' }}>
                     {followingUsers.length} Following
                   </p>
                   <p
                     onClick={followerUsers.length > 0 ? openFollowersModal : undefined}
-                    style={{ cursor: 'pointer' }}
-                  >
+                    style={{ cursor: 'pointer' }}>
                     {followerUsers.length} Followers
                   </p>
                 </MetadataContainer>
@@ -133,8 +135,7 @@ export function UserProfile() {
                 isUserAlreadyFollowed
                   ? unFollowAUser(singleUserData._id)
                   : followUser(singleUserData._id)
-              }
-            >
+              }>
               {isUserAlreadyFollowed ? `UnFollow` : `Follow`}
             </Button>
           )}
