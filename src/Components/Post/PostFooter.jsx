@@ -11,9 +11,13 @@ import { ImageTextContainer } from '../PageWrapper/PageWrappers.style';
 export function PostFooter({ post }) {
   const { currentUser, userBookmarks } = React.useContext(LoginContext);
   const { dislikeAPost, likeAPost, removeBookMarkedPost, bookMarkAPost } = usePostApis();
-  const isPostLikedByUser = post.likes.likedBy.find((item) => item._id === currentUser._id);
+  const isPostLikedByUser = post.likes.likedBy.find(
+    (username) => username === currentUser.username
+  );
   const isPostBookmarked = userBookmarks.find((item) => item._id === post._id);
   const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  console.log(isPostLikedByUser);
 
   function openModal() {
     setIsOpen(true);
@@ -29,8 +33,7 @@ export function PostFooter({ post }) {
         <>
           <ImageTextContainer style={{ gap: '0', alignItems: 'center' }}>
             <IconButton
-              onClick={() => (isPostLikedByUser ? dislikeAPost(post._id) : likeAPost(post._id))}
-            >
+              onClick={() => (isPostLikedByUser ? dislikeAPost(post._id) : likeAPost(post._id))}>
               {isPostLikedByUser ? <AiFillHeart size={20} /> : <AiOutlineHeart size={20} />}
             </IconButton>
             <span>{post.likes.likeCount > 0 && post.likes.likeCount}</span>
@@ -45,8 +48,7 @@ export function PostFooter({ post }) {
           <IconButton
             onClick={() =>
               isPostBookmarked ? removeBookMarkedPost(post._id) : bookMarkAPost(post._id)
-            }
-          >
+            }>
             {isPostBookmarked ? <BsFillBookmarkFill size={16} /> : <BsBookmark size={16} />}
           </IconButton>
         </>
