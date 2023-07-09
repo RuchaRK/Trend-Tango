@@ -19,11 +19,11 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export function PageError() {
+export function NotFound() {
   return (
     <Container>
-      <H1>Error</H1>
-      <Message>Opps! Something Went Wrong</Message>
+      <H1>404</H1>
+      <Message>Opps! Page Not Found</Message>
     </Container>
   );
 }

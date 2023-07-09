@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { ColorPalette } from '../Color';
 
-const StyledButton = styled.button(({ varient = 'contained', fullWidth }) => {
+const StyledButton = styled.button(({ variant = 'contained', fullWidth }) => {
   const baseCss = {
     padding: '6px 16px',
     borderRadius: '4px',
@@ -16,7 +16,7 @@ const StyledButton = styled.button(({ varient = 'contained', fullWidth }) => {
     gap: '4px',
     textDecoration: 'none'
   };
-  if (varient === 'outlined') {
+  if (variant === 'outlined') {
     return {
       ...baseCss,
       border: `1px solid ${ColorPalette.primary.main}`,
@@ -58,9 +58,9 @@ const StyledButton = styled.button(({ varient = 'contained', fullWidth }) => {
   };
 });
 
-export function Button({ varient, fullWidth, children, icon, ...props }) {
+export function Button({ varient: variant, fullWidth, children, icon, ...props }) {
   return (
-    <StyledButton varient={varient} fullWidth={fullWidth} {...props}>
+    <StyledButton variant={variant} fullWidth={fullWidth} {...props}>
       {children}
       {icon && icon}
     </StyledButton>
@@ -68,13 +68,14 @@ export function Button({ varient, fullWidth, children, icon, ...props }) {
 }
 
 Button.propTypes = {
-  varient: PropTypes.oneOf(['contained', 'outlined']).isRequired,
+  variant: PropTypes.oneOf(['contained', 'outlined']),
   fullWidth: PropTypes.bool,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
   icon: PropTypes.element
 };
 
 Button.defaultProps = {
   fullWidth: false,
-  icon: undefined
+  icon: undefined,
+  variant: 'contained'
 };

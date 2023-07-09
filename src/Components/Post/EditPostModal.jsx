@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { toast } from 'react-toastify';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
 import { usePostApis } from '../../Hook/usePostApis';
@@ -10,17 +11,19 @@ export function EditPostModal({ isOpen, closeModal, post }) {
 
   const updatePost = async (postIdValue, postData) => {
     await editPost(postIdValue, postData);
+    toast.success('Post edited successfully');
     closeModal(postIdValue);
   };
 
   return (
     <Modal
       isOpen={isOpen}
-      height="302px"
+      height="auto"
       width="800px"
       title="Edit Your Post"
-      closeModal={() => closeModal()}>
-      <CreatePostContainer>
+      closeModal={() => closeModal()}
+    >
+      <CreatePostContainer style={{margin: "16px 0px", padding: 0, background: "#fff"}}>
         <PostInput>
           <TextArea
             name="content"

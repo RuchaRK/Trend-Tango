@@ -29,7 +29,8 @@ export function PostFooter({ post }) {
         <>
           <ImageTextContainer style={{ gap: '0', alignItems: 'center' }}>
             <IconButton
-              onClick={() => (isPostLikedByUser ? dislikeAPost(post._id) : likeAPost(post._id))}>
+              onClick={() => (isPostLikedByUser ? dislikeAPost(post._id) : likeAPost(post._id))}
+            >
               {isPostLikedByUser ? <AiFillHeart size={20} /> : <AiOutlineHeart size={20} />}
             </IconButton>
             <span>{post.likes.likeCount > 0 && post.likes.likeCount}</span>
@@ -44,7 +45,8 @@ export function PostFooter({ post }) {
           <IconButton
             onClick={() =>
               isPostBookmarked ? removeBookMarkedPost(post._id) : bookMarkAPost(post._id)
-            }>
+            }
+          >
             {isPostBookmarked ? <BsFillBookmarkFill size={16} /> : <BsBookmark size={16} />}
           </IconButton>
         </>

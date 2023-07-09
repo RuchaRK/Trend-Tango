@@ -1,5 +1,5 @@
-import { Response } from "miragejs";
-import { formatDate, requiresAuth } from "../utils/authUtils";
+import { Response } from 'miragejs';
+import { formatDate, requiresAuth } from '../utils/authUtils';
 
 /**
  * All the routes related to user are present here.
@@ -29,7 +29,7 @@ export const getUserHandler = function (schema, request) {
       500,
       {},
       {
-        error,
+        error
       }
     );
   }
@@ -49,9 +49,7 @@ export const editUserHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          errors: ['The username you entered is not Registered. Not Found error']
         }
       );
     }
@@ -62,9 +60,7 @@ export const editUserHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "Username cannot be changed",
-          ],
+          errors: ['Username cannot be changed']
         }
       );
     }
@@ -77,7 +73,7 @@ export const editUserHandler = function (schema, request) {
       500,
       {},
       {
-        error,
+        error
       }
     );
   }
@@ -96,9 +92,7 @@ export const getBookmarkPostsHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          errors: ['The username you entered is not Registered. Not Found error']
         }
       );
     }
@@ -108,7 +102,7 @@ export const getBookmarkPostsHandler = function (schema, request) {
       500,
       {},
       {
-        error,
+        error
       }
     );
   }
@@ -128,34 +122,23 @@ export const bookmarkPostHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          errors: ['The username you entered is not Registered. Not Found error']
         }
       );
     }
-    const isBookmarked = user.bookmarks.some(
-      (currPost) => currPost._id === postId
-    );
+    const isBookmarked = user.bookmarks.some((currPost) => currPost._id === postId);
     if (isBookmarked) {
-      return new Response(
-        400,
-        {},
-        { errors: ["This Post is already bookmarked"] }
-      );
+      return new Response(400, {}, { errors: ['This Post is already bookmarked'] });
     }
-    user.bookmarks.push(post);
-    this.db.users.update(
-      { _id: user._id },
-      { ...user, updatedAt: formatDate() }
-    );
+    user.bookmarks.push({ ...post });
+    this.db.users.update({ _id: user._id }, { ...user, updatedAt: formatDate() });
     return new Response(200, {}, { bookmarks: user.bookmarks });
   } catch (error) {
     return new Response(
       500,
       {},
       {
-        error,
+        error
       }
     );
   }
@@ -175,33 +158,24 @@ export const removePostFromBookmarkHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          errors: ['The username you entered is not Registered. Not Found error']
         }
       );
     }
-    const isBookmarked = user.bookmarks.some(
-      (currPost) => currPost._id === postId
-    );
+    const isBookmarked = user.bookmarks.some((currPost) => currPost._id === postId);
     if (!isBookmarked) {
-      return new Response(400, {}, { errors: ["Post not bookmarked yet"] });
+      return new Response(400, {}, { errors: ['Post not bookmarked yet'] });
     }
-    const filteredBookmarks = user.bookmarks.filter(
-      (currPost) => currPost._id !== postId
-    );
+    const filteredBookmarks = user.bookmarks.filter((currPost) => currPost._id !== postId);
     user = { ...user, bookmarks: filteredBookmarks };
-    this.db.users.update(
-      { _id: user._id },
-      { ...user, updatedAt: formatDate() }
-    );
+    this.db.users.update({ _id: user._id }, { ...user, updatedAt: formatDate() });
     return new Response(200, {}, { bookmarks: user.bookmarks });
   } catch (error) {
     return new Response(
       500,
       {},
       {
-        error,
+        error
       }
     );
   }
@@ -222,9 +196,7 @@ export const followUserHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          errors: ['The username you entered is not Registered. Not Found error']
         }
       );
     }
@@ -234,48 +206,37 @@ export const followUserHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "You cannot follow yourself"
-          ],
+          errors: ['You cannot follow yourself']
         }
       );
     }
 
-    const isFollowing = user.following.some(
-      (currUser) => currUser._id === followUser._id
-    );
+    const isFollowing = user.following.some((currUser) => currUser._id === followUser._id);
 
     if (isFollowing) {
-      return new Response(400, {}, { errors: ["User Already following"] });
+      return new Response(400, {}, { errors: ['User Already following'] });
     }
 
     const updatedUser = {
       ...user,
-      following: [...user.following, { ...followUser }],
+      following: [...user.following, { ...followUser }]
     };
     const updatedFollowUser = {
       ...followUser,
-      followers: [...followUser.followers, { ...user }],
+      followers: [...followUser.followers, { ...user }]
     };
-    this.db.users.update(
-      { _id: user._id },
-      { ...updatedUser, updatedAt: formatDate() }
-    );
+    this.db.users.update({ _id: user._id }, { ...updatedUser, updatedAt: formatDate() });
     this.db.users.update(
       { _id: followUser._id },
       { ...updatedFollowUser, updatedAt: formatDate() }
     );
-    return new Response(
-      200,
-      {},
-      { user: updatedUser, followUser: updatedFollowUser }
-    );
+    return new Response(200, {}, { user: updatedUser, followUser: updatedFollowUser });
   } catch (error) {
     return new Response(
       500,
       {},
       {
-        error,
+        error
       }
     );
   }
@@ -296,51 +257,36 @@ export const unfollowUserHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          errors: ['The username you entered is not Registered. Not Found error']
         }
       );
     }
-    const isFollowing = user.following.some(
-      (currUser) => currUser._id === followUser._id
-    );
+    const isFollowing = user.following.some((currUser) => currUser._id === followUser._id);
 
     if (!isFollowing) {
-      return new Response(400, {}, { errors: ["User already not following"] });
+      return new Response(400, {}, { errors: ['User already not following'] });
     }
 
     const updatedUser = {
       ...user,
-      following: user.following.filter(
-        (currUser) => currUser._id !== followUser._id
-      ),
+      following: user.following.filter((currUser) => currUser._id !== followUser._id)
     };
     const updatedFollowUser = {
       ...followUser,
-      followers: followUser.followers.filter(
-        (currUser) => currUser._id !== user._id
-      ),
+      followers: followUser.followers.filter((currUser) => currUser._id !== user._id)
     };
-    this.db.users.update(
-      { _id: user._id },
-      { ...updatedUser, updatedAt: formatDate() }
-    );
+    this.db.users.update({ _id: user._id }, { ...updatedUser, updatedAt: formatDate() });
     this.db.users.update(
       { _id: followUser._id },
       { ...updatedFollowUser, updatedAt: formatDate() }
     );
-    return new Response(
-      200,
-      {},
-      { user: updatedUser, followUser: updatedFollowUser }
-    );
+    return new Response(200, {}, { user: updatedUser, followUser: updatedFollowUser });
   } catch (error) {
     return new Response(
       500,
       {},
       {
-        error,
+        error
       }
     );
   }

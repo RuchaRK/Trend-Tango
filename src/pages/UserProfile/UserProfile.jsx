@@ -22,16 +22,27 @@ import {
 } from './UserProfile.style';
 import { FollowingModal } from './FollowingModal';
 import { FollowersModal } from './FollowersModal';
+import { FeedContext } from '../../Context/FeedContext';
+import { useFetchApi } from '../../Hook/useFetchApi';
 
 export function UserProfile() {
   const { id } = useParams();
   const { followUser, unFollowAUser } = usePostApis();
   const { currentUser, following, followers } = React.useContext(LoginContext);
-  const [selectedUserPosts, setSelectedUserPosts] = React.useState([]);
+  const { postsToShow } = React.useContext(FeedContext);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = React.useState(false);
   const [isFollowersModalOpen, setIsFollowersModalOpen] = React.useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
-  const [singleUserData, setSingleUserData] = React.useState();
+
+  const {
+    data: { user },
+    isError,
+    isLoading,
+    setData
+  } = useFetchApi({ url: `/api/users/${id}`, dependencies: [id] });
+
+  const setSingleUserData = (userData) => setData({ user: userData });
+  const singleUserData = user ?? {};
 
   function openFollowingModal() {
     setIsFollowingModalOpen(true);
@@ -57,39 +68,19 @@ export function UserProfile() {
     setIsEditModalOpen(false);
   }
 
-  const fetchSingleUser = async () => {
-    try {
-      const response = await fetch(`/api/users/${id}`);
-      const data = await response.json();
-
-      if (data.user) {
-        setSingleUserData(data.user);
-        const postResponse = await fetch(`/api/posts/user/${data.user.username}`);
-        const postData = await postResponse.json();
-        setSelectedUserPosts(postData.posts);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  React.useEffect(() => {
-    fetchSingleUser();
-  }, [id]);
-
-  if (!singleUserData) {
-    return null;
-  }
+  const selectedUserPosts = postsToShow.filter(
+    (post) => post.username === singleUserData?.username
+  );
 
   const isUserAlreadyFollowed = following.find((node) => node._id === singleUserData._id);
 
   const followingUsers =
-    singleUserData._id === currentUser._id ? following : singleUserData.following;
+    (singleUserData._id === currentUser._id ? following : singleUserData.following) ?? [];
   const followerUsers =
-    singleUserData._id === currentUser._id ? followers : singleUserData.followers;
+    (singleUserData._id === currentUser._id ? followers : singleUserData.followers) ?? [];
 
   return (
-    <PageWrapper title={'Profile'}>
+    <PageWrapper title={'Profile'} loading={isLoading} error={isError}>
       <UserMainContainer>
         <ProfileContainer>
           <ProfileDataContainer>
@@ -116,12 +107,14 @@ export function UserProfile() {
                 <MetadataContainer>
                   <p
                     onClick={followingUsers.length > 0 ? openFollowingModal : undefined}
-                    style={{ cursor: 'pointer' }}>
+                    style={{ cursor: 'pointer' }}
+                  >
                     {followingUsers.length} Following
                   </p>
                   <p
                     onClick={followerUsers.length > 0 ? openFollowersModal : undefined}
-                    style={{ cursor: 'pointer' }}>
+                    style={{ cursor: 'pointer' }}
+                  >
                     {followerUsers.length} Followers
                   </p>
                 </MetadataContainer>
@@ -130,17 +123,18 @@ export function UserProfile() {
           </ProfileDataContainer>
 
           {singleUserData._id === currentUser._id ? (
-            <Button varient="outlined" onClick={() => openEditModal()}>
+            <Button variant="outlined" onClick={() => openEditModal()}>
               Edit
             </Button>
           ) : (
             <Button
-              varient="outlined"
+              variant="outlined"
               onClick={() =>
                 isUserAlreadyFollowed
                   ? unFollowAUser(singleUserData._id)
                   : followUser(singleUserData._id)
-              }>
+              }
+            >
               {isUserAlreadyFollowed ? `UnFollow` : `Follow`}
             </Button>
           )}

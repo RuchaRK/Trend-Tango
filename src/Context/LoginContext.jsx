@@ -48,7 +48,8 @@ export function LoginContextProvider({ children }) {
         setUserBookmarks,
         setFollowing,
         setCurrentUser
-      }}>
+      }}
+    >
       {children}
     </LoginContext.Provider>
   );

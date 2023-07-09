@@ -27,7 +27,8 @@ export function EditModal({ isOpen, closeEditModal, initialUserData, setSingleUs
       height="auto"
       width="420px"
       title="Edit Profile"
-      closeModal={() => closeEditModal()}>
+      closeModal={() => closeEditModal()}
+    >
       <div
         style={{
           display: 'flex',
@@ -35,7 +36,8 @@ export function EditModal({ isOpen, closeEditModal, initialUserData, setSingleUs
           gap: '16px',
           alignItems: 'flex-end',
           padding: '24px 0px'
-        }}>
+        }}
+      >
         <div
           style={{
             display: 'flex',
@@ -43,7 +45,8 @@ export function EditModal({ isOpen, closeEditModal, initialUserData, setSingleUs
             alignItems: 'center',
             width: '100%',
             position: 'relative'
-          }}>
+          }}
+        >
           {uploadedImage || initialUserData.imgUrl ? (
             <img
               alt="img"

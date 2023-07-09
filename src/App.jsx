@@ -10,6 +10,7 @@ import { Login } from './pages/Login/Login';
 import { Signin } from './pages/Signin/Signin';
 import { SinglePost } from './pages/SinglePost/SinglePost';
 import { UserProfile } from './pages/UserProfile/UserProfile';
+import { NotFound } from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
             </RequiresAuth>
           }
         />
+        <Route path={'*'} element={<NotFound />} />
       </Routes>
       <ToastContainer
         position="bottom-left"

@@ -89,7 +89,6 @@ export const usePostApis = () => {
   };
 
   const editPost = async (idValue, postData) => {
-    console.log('inside edit post');
     try {
       const response = await fetch(`/api/posts/edit/${idValue}`, {
         method: 'POST',
@@ -104,11 +103,9 @@ export const usePostApis = () => {
       });
 
       const data = await response.json();
-      console.log('edit post', { data });
 
       if (data.posts) {
         setPostsToShow(data.posts);
-        toast.success('Comment added');
       }
     } catch (error) {
       console.error(error);

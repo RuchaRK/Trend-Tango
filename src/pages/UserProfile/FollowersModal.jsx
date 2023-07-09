@@ -10,7 +10,8 @@ export function FollowersModal({ isOpen, closeModal, followerUsers }) {
       height="400px"
       width="300px"
       title="Followers"
-      closeModal={() => closeModal()}>
+      closeModal={() => closeModal()}
+    >
       <UserListContainer>
         {followerUsers.map((info) => (
           <SingleUserData style={{ border: 'none', padding: 'unset' }}>

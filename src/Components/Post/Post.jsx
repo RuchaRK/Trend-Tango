@@ -13,7 +13,7 @@ import {
 import { PostFooter } from './PostFooter';
 import { PostHeader } from './PostHeader';
 
-export function Post({ post, showComments }) {
+export function Post({ post, showComments, navigateToHomeOnDelete }) {
   const { userLookUp } = React.useContext(UserContext);
   const { currentUser } = React.useContext(LoginContext);
 
@@ -21,7 +21,7 @@ export function Post({ post, showComments }) {
   return (
     <>
       <PostContainer>
-        <PostHeader post={post} />
+        <PostHeader post={post} navigateToHomeOnDelete={navigateToHomeOnDelete} />
 
         <PostMessageContainer onClick={() => navigate(`/posts/${post._id}`)}>
           <p>{post.content}</p>

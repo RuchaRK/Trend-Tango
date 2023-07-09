@@ -8,7 +8,7 @@ export const CloseIconContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-item: center;
-  padding: 4px 4px 4px 16px;
+  padding: 16px 4px 4px 16px;
 `;
 
 export function Modal({
@@ -45,7 +45,8 @@ export function Modal({
           borderRadius: '4px',
           padding: 0
         }
-      }}>
+      }}
+    >
       <div>
         <CloseIconContainer>
           <h3>{title}</h3>

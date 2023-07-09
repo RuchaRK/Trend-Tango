@@ -9,33 +9,10 @@ export function SinglePost() {
   const { postsToShow } = React.useContext(FeedContext);
   const singlePost = postsToShow.find((post) => post._id === postId);
 
-  console.log(singlePost);
-
-  // async function fetchUserRelatedPosts() {
-  //   try {
-  //     const response = await fetch(`/api/posts/${postId}`);
-  //     const data = await response.json();
-
-  //     if (data.post) {
-  //       setSinglePost(data.post);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-  // React.useEffect(() => {
-  //   fetchUserRelatedPosts();
-  // }, [postId]);
-
-  // if (!singlePost) {
-  //   return null;
-  // }
-
   return (
     <PageWrapper title="Post">
       <div style={{ paddingTop: '24px' }}>
-        <Post post={singlePost} showComments />
+        <Post post={singlePost} showComments navigateToHomeOnDelete />
       </div>
     </PageWrapper>
   );
