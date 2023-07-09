@@ -8,7 +8,7 @@ import { routeName } from '../../App.routes';
 import { Input, Title } from '../../Components/Input';
 import { Button } from '../../Components/Button';
 
-const guestLoginValues = { username: 'ArjunReddy', password: 'ArjunReddy123' };
+const guestLoginValues = { username: 'AnayaJain', password: 'AnayaJain123' };
 export function Login() {
   const [loginData, setLoginData] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
