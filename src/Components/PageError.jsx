@@ -4,6 +4,7 @@ const H1 = styled.h1`
   font-size: 44px;
   margin-bottom: 20px;
   color: red;
+  margin-top: 200px;
 `;
 
 const Message = styled.h4`

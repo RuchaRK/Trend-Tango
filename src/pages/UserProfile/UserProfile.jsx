@@ -33,9 +33,15 @@ export function UserProfile() {
   const [isFollowingModalOpen, setIsFollowingModalOpen] = React.useState(false);
   const [isFollowersModalOpen, setIsFollowersModalOpen] = React.useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
-  
-  
-  const {data: singleUserData ,isError,isLoading, setData:setSingleUserData} = useFetchApi({url:`/api/users/${id}`, dependencies: [id]})
+
+  const {
+    data: { user },
+    isError,
+    isLoading,
+    setData: setSingleUserData
+  } = useFetchApi({ url: `/api/users/${id}`, dependencies: [id] });
+
+  const singleUserData = user ?? {};
 
   function openFollowingModal() {
     setIsFollowingModalOpen(true);
@@ -61,27 +67,19 @@ export function UserProfile() {
     setIsEditModalOpen(false);
   }
 
-  if(isLoading){
-    return <>Loading...</>
-  }
-
-  if(isError){
-    return <>Some thing went wrong</>
-  }
-  
-  const selectedUserPosts = postsToShow.filter(post=>post.username === singleUserData?.username)
+  const selectedUserPosts = postsToShow.filter(
+    (post) => post.username === singleUserData?.username
+  );
 
   const isUserAlreadyFollowed = following.find((node) => node._id === singleUserData._id);
 
   const followingUsers =
-    singleUserData._id === currentUser._id ? following : singleUserData.following;
+    (singleUserData._id === currentUser._id ? following : singleUserData.following) ?? [];
   const followerUsers =
-    singleUserData._id === currentUser._id ? followers : singleUserData.followers;
-
-
+    (singleUserData._id === currentUser._id ? followers : singleUserData.followers) ?? [];
 
   return (
-    <PageWrapper title={'Profile'}>
+    <PageWrapper title={'Profile'} loading={isLoading} error={isError}>
       <UserMainContainer>
         <ProfileContainer>
           <ProfileDataContainer>
@@ -122,12 +120,12 @@ export function UserProfile() {
           </ProfileDataContainer>
 
           {singleUserData._id === currentUser._id ? (
-            <Button varient="outlined" onClick={() => openEditModal()}>
+            <Button variant="outlined" onClick={() => openEditModal()}>
               Edit
             </Button>
           ) : (
             <Button
-              varient="outlined"
+              variant="outlined"
               onClick={() =>
                 isUserAlreadyFollowed
                   ? unFollowAUser(singleUserData._id)

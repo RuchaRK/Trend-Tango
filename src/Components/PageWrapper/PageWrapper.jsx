@@ -21,9 +21,14 @@ import {
   Title
 } from './PageWrappers.style';
 import { UserList } from './UserList';
+import { Loader } from '../Loader';
+import { PageError } from '../PageError';
 
-export function PageWrapper({ children, title }) {
+export function PageWrapper({ children, title, loading, error }) {
   const { logout, currentUser } = useContext(LoginContext);
+
+  // eslint-disable-next-line no-nested-ternary
+  const content = loading ? <Loader /> : error ? <PageError /> : children;
 
   return (
     <>
@@ -94,7 +99,7 @@ export function PageWrapper({ children, title }) {
 
         <CenterContainer>
           <Title>{title}</Title>
-          {children}
+          {content}
         </CenterContainer>
 
         <RightContainer>

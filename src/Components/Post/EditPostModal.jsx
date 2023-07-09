@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { toast } from 'react-toastify';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
 import { usePostApis } from '../../Hook/usePostApis';
@@ -10,6 +11,7 @@ export function EditPostModal({ isOpen, closeModal, post }) {
 
   const updatePost = async (postIdValue, postData) => {
     await editPost(postIdValue, postData);
+    toast.success('Post edited successfully');
     closeModal(postIdValue);
   };
 

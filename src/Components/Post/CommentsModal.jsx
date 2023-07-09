@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { v4 as uuid } from 'uuid';
+import { toast } from 'react-toastify';
 import { Modal } from '../Modal';
 import { usePostApis } from '../../Hook/usePostApis';
 import { Button } from '../Button';
@@ -12,6 +13,7 @@ export function CommentsModal({ isOpen, closeModal, post }) {
 
   const addComments = async (postIdValue, postData) => {
     await editPost(postIdValue, postData);
+    toast.success('Comment added');
     setComment('');
     closeModal();
   };

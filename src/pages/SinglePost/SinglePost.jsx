@@ -12,7 +12,7 @@ export function SinglePost() {
   return (
     <PageWrapper title="Post">
       <div style={{ paddingTop: '24px' }}>
-        <Post post={singlePost} showComments />
+        <Post post={singlePost} showComments navigateToHomeOnDelete />
       </div>
     </PageWrapper>
   );

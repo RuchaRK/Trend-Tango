@@ -106,7 +106,6 @@ export const usePostApis = () => {
 
       if (data.posts) {
         setPostsToShow(data.posts);
-        toast.success('Comment added');
       }
     } catch (error) {
       console.error(error);

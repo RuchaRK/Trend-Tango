@@ -1,6 +1,7 @@
 import { Menu, MenuButton, MenuItem } from '@szhsin/react-menu';
 import * as React from 'react';
 import { BsThreeDots } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 import { MdOutlineDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
 import { LoginContext } from '../../Context/LoginContext';
 import { UserContext } from '../../Context/UserContext';
@@ -13,12 +14,13 @@ import { EditPostModal } from './EditPostModal';
 import { DateContainer, PostDateContainer } from './Post.style';
 import { useUserApis } from '../../Hook/useUserApis';
 
-export function PostHeader({ post }) {
+export function PostHeader({ post, navigateToHomeOnDelete }) {
   const { userLookUp } = React.useContext(UserContext);
   const { currentUser } = React.useContext(LoginContext);
   const { unFollowAUser } = useUserApis();
   const { deletePost } = usePostApis();
   const [openModal, setOpenModal] = React.useState(false);
+  const navigate = useNavigate();
   const userDetails =
     post.username === currentUser.username ? currentUser : userLookUp[post.username];
 
@@ -68,7 +70,13 @@ export function PostHeader({ post }) {
                 Edit
               </ImageTextContainer>
             </MenuItem>
-            <MenuItem onClick={() => deletePost(post._id)}>
+            <MenuItem
+              onClick={() => {
+                deletePost(post._id);
+                if (navigateToHomeOnDelete) {
+                  navigate('/');
+                }
+              }}>
               <ImageTextContainer>
                 <MdOutlineDeleteOutline />
                 Delete

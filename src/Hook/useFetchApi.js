@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const useFetchApi = ({ url, dependencies }) => {
+export const useFetchApi = ({ url, dependencies = [] }) => {
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isError, setIsError] = React.useState(false);
@@ -24,7 +24,8 @@ export const useFetchApi = ({ url, dependencies }) => {
 
   React.useEffect(() => {
     fetchData();
-  }, dependencies ? dependencies:[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...dependencies]);
 
   return {
     data,
