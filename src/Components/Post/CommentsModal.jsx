@@ -26,7 +26,7 @@ export function CommentsModal({ isOpen, closeModal, post }) {
       title="Post Your Comment"
       closeModal={() => closeModal()}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '10px 10px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '16px 0px' }}>
         <input
           style={{ padding: '15px 15px', borderRadius: '4px', border: '1px solid #e4e4e4' }}
           type="text"

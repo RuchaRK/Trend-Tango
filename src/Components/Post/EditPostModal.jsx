@@ -18,12 +18,12 @@ export function EditPostModal({ isOpen, closeModal, post }) {
   return (
     <Modal
       isOpen={isOpen}
-      height="302px"
+      height="auto"
       width="800px"
       title="Edit Your Post"
       closeModal={() => closeModal()}
     >
-      <CreatePostContainer>
+      <CreatePostContainer style={{margin: "16px 0px", padding: 0, background: "#fff"}}>
         <PostInput>
           <TextArea
             name="content"
