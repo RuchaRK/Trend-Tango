@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const useFetchApi = ({ url }) => {
+export const useFetchApi = ({ url, dependencies }) => {
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isError, setIsError] = React.useState(false);
@@ -24,7 +24,7 @@ export const useFetchApi = ({ url }) => {
 
   React.useEffect(() => {
     fetchData();
-  });
+  }, dependencies ? dependencies:[]);
 
   return {
     data,

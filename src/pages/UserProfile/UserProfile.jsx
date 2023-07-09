@@ -22,16 +22,20 @@ import {
 } from './UserProfile.style';
 import { FollowingModal } from './FollowingModal';
 import { FollowersModal } from './FollowersModal';
+import { FeedContext } from '../../Context/FeedContext';
+import { useFetchApi } from '../../Hook/useFetchApi';
 
 export function UserProfile() {
   const { id } = useParams();
   const { followUser, unFollowAUser } = usePostApis();
   const { currentUser, following, followers } = React.useContext(LoginContext);
-  const [selectedUserPosts, setSelectedUserPosts] = React.useState([]);
+  const { postsToShow } = React.useContext(FeedContext);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = React.useState(false);
   const [isFollowersModalOpen, setIsFollowersModalOpen] = React.useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
-  const [singleUserData, setSingleUserData] = React.useState();
+  
+  
+  const {data: singleUserData ,isError,isLoading, setData:setSingleUserData} = useFetchApi({url:`/api/users/${id}`, dependencies: [id]})
 
   function openFollowingModal() {
     setIsFollowingModalOpen(true);
@@ -57,29 +61,15 @@ export function UserProfile() {
     setIsEditModalOpen(false);
   }
 
-  const fetchSingleUser = async () => {
-    try {
-      const response = await fetch(`/api/users/${id}`);
-      const data = await response.json();
-
-      if (data.user) {
-        setSingleUserData(data.user);
-        const postResponse = await fetch(`/api/posts/user/${data.user.username}`);
-        const postData = await postResponse.json();
-        setSelectedUserPosts(postData.posts);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  React.useEffect(() => {
-    fetchSingleUser();
-  }, [id]);
-
-  if (!singleUserData) {
-    return null;
+  if(isLoading){
+    return <>Loading...</>
   }
+
+  if(isError){
+    return <>Some thing went wrong</>
+  }
+  
+  const selectedUserPosts = postsToShow.filter(post=>post.username === singleUserData?.username)
 
   const isUserAlreadyFollowed = following.find((node) => node._id === singleUserData._id);
 
@@ -87,6 +77,8 @@ export function UserProfile() {
     singleUserData._id === currentUser._id ? following : singleUserData.following;
   const followerUsers =
     singleUserData._id === currentUser._id ? followers : singleUserData.followers;
+
+
 
   return (
     <PageWrapper title={'Profile'}>

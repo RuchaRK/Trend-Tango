@@ -16,6 +16,7 @@ export const PostCommentsContainer = styled.div`
   padding: 8px;
   flex-direction: column;
   align-items: flex-start;
+  gap: 12px;
 `;
 
 export const CommentsHeader = styled.div``;
