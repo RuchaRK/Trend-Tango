@@ -8,7 +8,7 @@ export function Feed({ feedToShow }) {
     <FeedContainer>
       {feedToShow &&
         feedToShow.map((post) => {
-          return <Post post={post} />;
+          return <Post post={post} key={post._id}/>;
         })}
     </FeedContainer>
   );

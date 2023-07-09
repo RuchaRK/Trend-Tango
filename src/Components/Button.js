@@ -68,13 +68,14 @@ export function Button({ varient, fullWidth, children, icon, ...props }) {
 }
 
 Button.propTypes = {
-  varient: PropTypes.oneOf(['contained', 'outlined']).isRequired,
+  varient: PropTypes.oneOf(['contained', 'outlined']),
   fullWidth: PropTypes.bool,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
   icon: PropTypes.element
 };
 
 Button.defaultProps = {
   fullWidth: false,
-  icon: undefined
+  icon: undefined,
+  varient: "contained"
 };

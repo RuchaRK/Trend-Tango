@@ -19,7 +19,7 @@ export function UserList() {
       <UserListContainer>
         {users.map((user) =>
           user._id !== currentUser._id && !following.find((node) => node._id === user._id) ? (
-            <SingleUserData>
+            <SingleUserData key={user._id}>
               <UserCard
                 firstName={user.firstName}
                 lastName={user.lastName}
