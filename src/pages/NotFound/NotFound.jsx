@@ -19,7 +19,7 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export function PageError() {
+export function NotFound() {
   return (
     <Container>
       <H1>404</H1>
