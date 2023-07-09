@@ -103,7 +103,8 @@ export function Home() {
                 await createANewPost({ content: postContent, img: uploadedImage });
                 setPostContent('');
                 setUploadedImage(null);
-              }}>
+              }}
+            >
               Post
             </Button>
           </ButtonContainer>
@@ -119,10 +120,12 @@ export function Home() {
                   alignItems: 'center',
                   border: 'none',
                   justifyContent: 'center'
-                }}>
+                }}
+              >
                 <MdSort size={20} />
               </MenuButton>
-            }>
+            }
+          >
             <MenuItem onClick={() => setFilterType('date')}>Latest</MenuItem>
             <MenuItem onClick={() => setFilterType('likes')}>Trending</MenuItem>
           </Menu>

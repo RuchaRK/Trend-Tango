@@ -14,7 +14,8 @@ export function FollowingModal({ followingUsers, isOpen, closeModal, showAction 
       height="400px"
       width="300px"
       title="Following"
-      closeModal={() => closeModal()}>
+      closeModal={() => closeModal()}
+    >
       <UserListContainer>
         {followingUsers.map((info) => (
           <SingleUserData style={{ border: 'none', padding: 'unset' }}>

@@ -45,7 +45,8 @@ export function Modal({
           borderRadius: '4px',
           padding: 0
         }
-      }}>
+      }}
+    >
       <div>
         <CloseIconContainer>
           <h3>{title}</h3>

@@ -24,7 +24,8 @@ export function CommentsModal({ isOpen, closeModal, post }) {
       height="auto"
       width="640px"
       title="Post Your Comment"
-      closeModal={() => closeModal()}>
+      closeModal={() => closeModal()}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '10px 10px' }}>
         <input
           style={{ padding: '15px 15px', borderRadius: '4px', border: '1px solid #e4e4e4' }}
@@ -45,7 +46,8 @@ export function CommentsModal({ isOpen, closeModal, post }) {
                     })
                   : [{ _id: uuid(), content: comment, username: currentUser.username }]
               })
-            }>
+            }
+          >
             Comment
           </Button>
         </div>

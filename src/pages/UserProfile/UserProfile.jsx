@@ -38,9 +38,10 @@ export function UserProfile() {
     data: { user },
     isError,
     isLoading,
-    setData: setSingleUserData
+    setData
   } = useFetchApi({ url: `/api/users/${id}`, dependencies: [id] });
 
+  const setSingleUserData = (userData) => setData({ user: userData });
   const singleUserData = user ?? {};
 
   function openFollowingModal() {
@@ -106,12 +107,14 @@ export function UserProfile() {
                 <MetadataContainer>
                   <p
                     onClick={followingUsers.length > 0 ? openFollowingModal : undefined}
-                    style={{ cursor: 'pointer' }}>
+                    style={{ cursor: 'pointer' }}
+                  >
                     {followingUsers.length} Following
                   </p>
                   <p
                     onClick={followerUsers.length > 0 ? openFollowersModal : undefined}
-                    style={{ cursor: 'pointer' }}>
+                    style={{ cursor: 'pointer' }}
+                  >
                     {followerUsers.length} Followers
                   </p>
                 </MetadataContainer>
@@ -130,7 +133,8 @@ export function UserProfile() {
                 isUserAlreadyFollowed
                   ? unFollowAUser(singleUserData._id)
                   : followUser(singleUserData._id)
-              }>
+              }
+            >
               {isUserAlreadyFollowed ? `UnFollow` : `Follow`}
             </Button>
           )}

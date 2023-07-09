@@ -58,10 +58,12 @@ export function PostHeader({ post, navigateToHomeOnDelete }) {
               alignItems: 'center',
               border: '1px solid #B0B0B0',
               justifyContent: 'center'
-            }}>
+            }}
+          >
             <BsThreeDots />
           </MenuButton>
-        }>
+        }
+      >
         {post.username === currentUser.username ? (
           <>
             <MenuItem onClick={() => openEditModal()}>
@@ -76,7 +78,8 @@ export function PostHeader({ post, navigateToHomeOnDelete }) {
                 if (navigateToHomeOnDelete) {
                   navigate('/');
                 }
-              }}>
+              }}
+            >
               <ImageTextContainer>
                 <MdOutlineDeleteOutline />
                 Delete

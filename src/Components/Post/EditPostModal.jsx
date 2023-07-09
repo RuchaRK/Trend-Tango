@@ -21,7 +21,8 @@ export function EditPostModal({ isOpen, closeModal, post }) {
       height="302px"
       width="800px"
       title="Edit Your Post"
-      closeModal={() => closeModal()}>
+      closeModal={() => closeModal()}
+    >
       <CreatePostContainer>
         <PostInput>
           <TextArea

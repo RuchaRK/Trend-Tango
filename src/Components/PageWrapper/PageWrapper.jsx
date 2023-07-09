@@ -48,7 +48,8 @@ export function PageWrapper({ children, title, loading, error }) {
               to={routeName.HOME}
               style={({ isActive }) => ({
                 color: isActive ? '#150AA1' : '#686868'
-              })}>
+              })}
+            >
               <Option>
                 <IconContainer>
                   <AiOutlineHome size={20} />
@@ -61,7 +62,8 @@ export function PageWrapper({ children, title, loading, error }) {
               to={routeName.EXPLORE}
               style={({ isActive }) => ({
                 color: isActive ? '#150AA1' : '#686868'
-              })}>
+              })}
+            >
               <Option>
                 <IconContainer>
                   <MdOutlineExplore size={20} />
@@ -74,7 +76,8 @@ export function PageWrapper({ children, title, loading, error }) {
               to={routeName.BOOKMARK}
               style={({ isActive }) => ({
                 color: isActive ? '#150AA1' : '#686868'
-              })}>
+              })}
+            >
               <Option>
                 <IconContainer>
                   <BsFillBookmarkFill size={16} />
@@ -86,7 +89,8 @@ export function PageWrapper({ children, title, loading, error }) {
               to={routeName.LOGIN}
               style={({ isActive }) => ({
                 color: isActive ? '#150AA1' : '#686868'
-              })}>
+              })}
+            >
               <Option onClick={logout}>
                 <IconContainer>
                   <BiLogOut size={20} />

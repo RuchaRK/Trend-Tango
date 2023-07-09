@@ -79,7 +79,8 @@ export function Login() {
               fullWidth
               type="button"
               disabled={isLoading}
-              onClick={() => checkCredentials(loginData.username, loginData.password)}>
+              onClick={() => checkCredentials(loginData.username, loginData.password)}
+            >
               {isLoading ? 'Logging in' : 'Login'}
             </Button>
             <Button
@@ -92,7 +93,8 @@ export function Login() {
                   password: guestLoginValues.password
                 });
                 checkCredentials(guestLoginValues.username, guestLoginValues.password);
-              }}>
+              }}
+            >
               Guest Login
             </Button>
             <Link style={{ textDecoration: 'none' }} to={routeName.SIGNIN}>
