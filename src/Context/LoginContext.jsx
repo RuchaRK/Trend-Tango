@@ -15,13 +15,13 @@ export function LoginContextProvider({ children }) {
 
   const navigate = useNavigate();
 
-  const allowLogin = (data) => {
+  const allowLogin = ({user, encodedToken}) => {
     setIsLoggedIn(true);
-    setLoginToken(data.encodedToken);
-    setCurrentUser(data.foundUser);
-    setFollowers(data.foundUser.followers);
-    setFollowing(data.foundUser.following);
-    setUserBookmarks(data.foundUser.bookmarks);
+    setLoginToken(encodedToken);
+    setCurrentUser(user);
+    setFollowers(user.followers);
+    setFollowing(user.following);
+    setUserBookmarks(user.bookmarks);
     navigate(routeName.HOME);
     toast.success('👋 It’s so good to have you back!!');
   };

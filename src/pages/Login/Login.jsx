@@ -36,7 +36,7 @@ export function Login() {
       }
 
       if (data) {
-        allowLogin(data);
+        allowLogin({user: data.foundUser, encodedToken: data.encodedToken});
       }
     } catch (error) {
       console.error(error);

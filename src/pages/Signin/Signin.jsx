@@ -16,8 +16,8 @@ export function Signin() {
       const response = await fetch('api/auth/signup', {
         method: 'POST',
         body: JSON.stringify({
-          firstname: userData.firstname,
-          lastname: userData.lastname,
+          firstName: userData.firstname,
+          lastName: userData.lastname,
           username: userData.username,
           password: userData.password
         }),
@@ -36,7 +36,7 @@ export function Signin() {
       }
 
       if (data.encodedToken) {
-        allowLogin(data.encodedToken);
+        allowLogin({user: data.createdUser, encodedToken: data.encodedToken});
       }
     } catch (error) {
       console.error(error);
