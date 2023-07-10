@@ -17,8 +17,6 @@ export function PostFooter({ post }) {
   const isPostBookmarked = userBookmarks.find((item) => item._id === post._id);
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  console.log(isPostLikedByUser);
-
   function openModal() {
     setIsOpen(true);
   }
